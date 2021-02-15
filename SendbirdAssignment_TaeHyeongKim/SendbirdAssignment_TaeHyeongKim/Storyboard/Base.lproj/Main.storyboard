@@ -17,26 +17,57 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="2m3-sS-xaB">
+                            <searchBar contentMode="redraw" placeholder="enter book name" translatesAutoresizingMaskIntoConstraints="NO" id="2m3-sS-xaB">
                                 <rect key="frame" x="0.0" y="44" width="414" height="56"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
                             </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4s1-EE-r1Q">
+                                <rect key="frame" x="0.0" y="100" width="414" height="762"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="znP-k2-x3m">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="127"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Reuslt" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vXQ-iI-wTo">
+                                            <rect key="frame" x="170" y="53" width="74" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstItem="vXQ-iI-wTo" firstAttribute="centerX" secondItem="znP-k2-x3m" secondAttribute="centerX" id="IIJ-Rk-CNg"/>
+                                        <constraint firstItem="vXQ-iI-wTo" firstAttribute="centerY" secondItem="znP-k2-x3m" secondAttribute="centerY" id="Q6B-Ij-8Nm"/>
+                                    </constraints>
+                                </view>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="4s1-EE-r1Q" firstAttribute="top" secondItem="2m3-sS-xaB" secondAttribute="bottom" id="3XE-n2-qzv"/>
                             <constraint firstItem="2m3-sS-xaB" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="89f-1Q-IN5"/>
                             <constraint firstItem="2m3-sS-xaB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="9SH-bd-Wki"/>
+                            <constraint firstItem="4s1-EE-r1Q" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="KzW-L6-lPm"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="4s1-EE-r1Q" secondAttribute="bottom" id="OTg-ZT-W8O"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="4s1-EE-r1Q" secondAttribute="trailing" id="Wcf-2c-i1i"/>
                             <constraint firstAttribute="trailing" secondItem="2m3-sS-xaB" secondAttribute="trailing" id="lch-Tw-7oX"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="noResultLabel" destination="znP-k2-x3m" id="rQr-dJ-37H"/>
                         <outlet property="searchBar" destination="2m3-sS-xaB" id="kKI-aF-QWu"/>
+                        <outlet property="tableView" destination="4s1-EE-r1Q" id="Pos-Mu-ok3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-204" y="89"/>
+            <point key="canvasLocation" x="-204.34782608695653" y="88.392857142857139"/>
         </scene>
         <!--Detail Book View Controller-->
         <scene sceneID="hff-dP-q6W">

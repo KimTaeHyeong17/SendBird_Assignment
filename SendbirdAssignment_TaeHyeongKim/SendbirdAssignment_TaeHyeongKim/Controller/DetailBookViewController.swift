@@ -8,22 +8,25 @@
 import UIKit
 
 class DetailBookViewController: UIViewController {
-
+    
+    var isbn13: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        getBookDetail(isbn13: isbn13)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    private func getBookDetail(isbn13: String) {
+        NetworkService.shared.getBookDetail(isbn13: isbn13){ (result) in
+            switch result {
+            case .success(let data):
+                print(data)
+            case .failure(let err):
+                print(err.localizedDescription)
+            }
+        }
     }
-    */
-
+    
 }
