@@ -22,11 +22,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = UIWindow(windowScene: windowScene)
         //self.window =  UIWindow(frame: UIScreen.main.bounds)
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let rootVC = storyboard.instantiateViewController(identifier: "SearchViewController") as? SearchViewController else {
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let rootVC = storyboard.instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController else {
             print("ViewController not found")
             return
         }
+        rootVC.title = "🔎 Seach Book!"
         let rootNavigationController = UINavigationController(rootViewController: rootVC)
         self.window?.rootViewController = rootNavigationController
         self.window?.makeKeyAndVisible()
