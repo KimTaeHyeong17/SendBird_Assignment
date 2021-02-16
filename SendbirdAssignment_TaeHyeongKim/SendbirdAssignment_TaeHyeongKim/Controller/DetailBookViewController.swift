@@ -9,24 +9,96 @@ import UIKit
 
 class DetailBookViewController: UIViewController {
     
+    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var lbTitle: UILabel!
+    @IBOutlet weak var lbSubTitle: UILabel!
+    @IBOutlet weak var imgBook: UIImageView!
+    @IBOutlet weak var lbAuthor: UILabel!
+    @IBOutlet weak var lbPublisher: UILabel!
+    @IBOutlet weak var lbLanguage: UILabel!
+    @IBOutlet weak var lbIsbn10: UILabel!
+    @IBOutlet weak var lbIsbn13: UILabel!
+    @IBOutlet weak var lbPages: UILabel!
+    @IBOutlet weak var lbYear: UILabel!
+    @IBOutlet weak var lbRating: UILabel!
+    @IBOutlet weak var lbDescription: UILabel!
+    @IBOutlet weak var lbPrice: UILabel!
+    @IBOutlet weak var tvMemo: UITextView!
+    
     var isbn13: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        getBookDetail(isbn13: isbn13)
+        self.hideKeyboardWhenTappedAround()
+        fetchBookDetail(isbn13: isbn13)
+        addKeyboardNotification()
+    }
+    
+    private func setBookDetail(data: BookDetailModel){
+        lbTitle.text = data.title
+        lbSubTitle.text = data.subtitle
+        lbAuthor.text = data.authors
+        lbPublisher.text = data.publisher
+        lbLanguage.text = data.language
+        lbIsbn10.text = data.isbn10
+        lbIsbn13.text = data.isbn13
+        lbPages.text = data.pages
+        lbYear.text = data.year
+        lbRating.text = data.rating
+        lbDescription.text = data.desc
+        lbPrice.text = data.price
+        if let img = data.image {
+            urlImageManager.shared.getUrlImage(img) { (image) in
+                self.imgBook.image = image
+            }
+        }
     }
     
     
-    private func getBookDetail(isbn13: String) {
+    private func fetchBookDetail(isbn13: String) {
         NetworkService.shared.getBookDetail(isbn13: isbn13){ (result) in
             switch result {
             case .success(let data):
-                print(data)
+                DispatchQueue.main.async {
+                    self.setBookDetail(data: data)
+                }
             case .failure(let err):
                 print(err.localizedDescription)
             }
         }
     }
     
+    private func addKeyboardNotification() {
+        NotificationCenter.default.addObserver(
+          self,
+          selector: #selector(keyboardWillShow),
+          name: UIResponder.keyboardWillShowNotification,
+          object: nil
+        )
+        
+        NotificationCenter.default.addObserver(
+          self,
+          selector: #selector(keyboardWillHide),
+          name: UIResponder.keyboardWillHideNotification,
+          object: nil
+        )
+      }
+    
+    @objc private func keyboardWillShow(_ notification: Notification) {
+      if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+        let keybaordRectangle = keyboardFrame.cgRectValue
+        let keyboardHeight = keybaordRectangle.height
+        containerView.frame.origin.y -= keyboardHeight
+      }
+    }
+      
+    @objc private func keyboardWillHide(_ notification: Notification) {
+      if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+        let keybaordRectangle = keyboardFrame.cgRectValue
+        let keyboardHeight = keybaordRectangle.height
+        containerView.frame.origin.y += keyboardHeight
+      }
+    }
+    
 }
+ 

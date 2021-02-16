@@ -79,13 +79,13 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 180
+        return 150
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "DetailBookViewController") as? DetailBookViewController,let isbn13 = resultArray[indexPath.row].isbn13 {
             vc.isbn13 = isbn13
-            vc.title = resultArray[indexPath.row].title
+            vc.title = "📓 Book Detail"
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
