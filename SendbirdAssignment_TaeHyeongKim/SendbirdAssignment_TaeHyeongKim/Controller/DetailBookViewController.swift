@@ -54,13 +54,12 @@ class DetailBookViewController: UIViewController {
         }
     }
     
-    
     private func fetchBookDetail(isbn13: String) {
-        NetworkService.shared.getBookDetail(isbn13: isbn13){ (result) in
+        NetworkService.shared.getBookDetail(isbn13: isbn13){ [weak self] (result) in
             switch result {
             case .success(let data):
                 DispatchQueue.main.async {
-                    self.setBookDetail(data: data)
+                    self?.setBookDetail(data: data)
                 }
             case .failure(let err):
                 print(err.localizedDescription)
@@ -68,6 +67,9 @@ class DetailBookViewController: UIViewController {
         }
     }
     
+    
+}
+extension DetailBookViewController {
     private func addKeyboardNotification() {
         NotificationCenter.default.addObserver(
           self,
@@ -99,6 +101,5 @@ class DetailBookViewController: UIViewController {
         containerView.frame.origin.y += keyboardHeight
       }
     }
-    
 }
  

@@ -19,12 +19,12 @@ enum Result<T> {
 }
 
 public enum HTTPNetworkRoute {
-    case searchBook(query: String)
+    case searchBook(query: String, page: Int)
     case bookDetail(query: String)
     var url: String{
         switch self {
-        case .searchBook(query: let keyword):
-            return "search/\(keyword)"
+        case .searchBook(query: let keyword, page: let num):
+            return "search/\(keyword)/\(num)"
         case .bookDetail(query: let isbn13):
             return "books/\(isbn13)"
         }
@@ -54,6 +54,7 @@ public enum HTTPNetworkError: String, Error {
 }
 
 public typealias HTTPParameters = [String:Any]?
+
 public typealias HTTPHeaders = [String:Any]?
 
 struct HTTPNetworkRequest {
@@ -138,13 +139,15 @@ public struct URLEncoder {
 }
 
 struct NetworkService {
+    
     static let shared = NetworkService()
+    
     let session = URLSession(configuration: .default)
     
-    func getSearchResult(keyword: String ,_ completion: @escaping (Result<SearchResultModel>) -> ()) {
+    func getSearchResult(keyword: String ,page: Int,  _ completion: @escaping (Result<SearchResultModel>) -> ()) {
         do {
             let request = try HTTPNetworkRequest.configureHTTPRequest(
-                from: .searchBook(query: keyword), with: nil, includes: nil, contains: nil, and: .get)
+                from: .searchBook(query: keyword,page: page), with: nil, includes: nil, contains: nil, and: .get)
             
             session.dataTask(with: request){ (data, res, err) in
                 if let response = res as? HTTPURLResponse, let unwrappedData = data {
