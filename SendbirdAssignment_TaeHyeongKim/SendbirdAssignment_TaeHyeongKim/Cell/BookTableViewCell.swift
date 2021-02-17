@@ -8,12 +8,18 @@
 import UIKit
 
 class BookTableViewCell: UITableViewCell {
+  
+    
     
     @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subTitleLabel: UILabel!
     @IBOutlet weak var isbn13Label: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var btnLink: UIButton!
+    
+    public var delegate: OpenSafariViewControllerDelegate?
+    public var url: String?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,7 +28,6 @@ class BookTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
     override func prepareForReuse() {
@@ -30,4 +35,11 @@ class BookTableViewCell: UITableViewCell {
         imgView.image = nil
     }
     
+    @IBAction func actionLink(_ sender: Any) {
+        if let url = url {
+            delegate?.openSafariViewController(url: url)
+        }
+    }
+    
+
 }

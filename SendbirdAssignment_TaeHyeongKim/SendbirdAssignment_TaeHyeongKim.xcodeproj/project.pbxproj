@@ -22,6 +22,7 @@
 		837E9A2E25DA6B9300D56BC5 /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837E9A2D25DA6B9300D56BC5 /* ImageCacheManager.swift */; };
 		837E9A3325DA794400D56BC5 /* BookDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837E9A3225DA794400D56BC5 /* BookDetailModel.swift */; };
 		837E9A3725DD0C7000D56BC5 /* SearchCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837E9A3625DD0C7000D56BC5 /* SearchCacheManager.swift */; };
+		837E9A4125DD472C00D56BC5 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837E9A4025DD472C00D56BC5 /* Protocols.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		837E9A2D25DA6B9300D56BC5 /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
 		837E9A3225DA794400D56BC5 /* BookDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailModel.swift; sourceTree = "<group>"; };
 		837E9A3625DD0C7000D56BC5 /* SearchCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCacheManager.swift; sourceTree = "<group>"; };
+		837E9A4025DD472C00D56BC5 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 				837E9A0325DA520C00D56BC5 /* Network.swift */,
 				837E9A2D25DA6B9300D56BC5 /* ImageCacheManager.swift */,
 				837E9A3625DD0C7000D56BC5 /* SearchCacheManager.swift */,
+				837E9A4025DD472C00D56BC5 /* Protocols.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -224,6 +227,7 @@
 				837E9A2625DA60D300D56BC5 /* BookTableViewCell.swift in Sources */,
 				837E9A0025DA514B00D56BC5 /* Extensions.swift in Sources */,
 				837E9A2E25DA6B9300D56BC5 /* ImageCacheManager.swift in Sources */,
+				837E9A4125DD472C00D56BC5 /* Protocols.swift in Sources */,
 				837E99B425DA4A6A00D56BC5 /* SearchViewController.swift in Sources */,
 				837E9A3725DD0C7000D56BC5 /* SearchCacheManager.swift in Sources */,
 				837E9A0725DA57B600D56BC5 /* BookSearchedModel.swift in Sources */,

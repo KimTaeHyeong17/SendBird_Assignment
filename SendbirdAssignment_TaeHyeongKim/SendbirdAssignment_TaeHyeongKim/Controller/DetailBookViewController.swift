@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class DetailBookViewController: UIViewController {
     
@@ -20,10 +21,16 @@ class DetailBookViewController: UIViewController {
     @IBOutlet weak var lbIsbn13: UILabel!
     @IBOutlet weak var lbPages: UILabel!
     @IBOutlet weak var lbYear: UILabel!
-    @IBOutlet weak var lbRating: UILabel!
     @IBOutlet weak var lbDescription: UILabel!
     @IBOutlet weak var lbPrice: UILabel!
     @IBOutlet weak var tvMemo: UITextView!
+    
+    
+    @IBOutlet weak var ratingStar0: UIImageView!
+    @IBOutlet weak var ratingStar1: UIImageView!
+    @IBOutlet weak var ratingStar2: UIImageView!
+    @IBOutlet weak var ratingStar3: UIImageView!
+    @IBOutlet weak var ratingStar4: UIImageView!
     
     var bookData: BookDetailModel?
     
@@ -32,6 +39,12 @@ class DetailBookViewController: UIViewController {
         setBookDetail(data: bookData!)
         self.hideKeyboardWhenTappedAround()
         addKeyboardNotification()
+        getMemo()
+        tvMemo.layer.cornerRadius = 5
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+       saveMemo()
     }
     
     private func setBookDetail(data: BookDetailModel){
@@ -44,7 +57,7 @@ class DetailBookViewController: UIViewController {
         lbIsbn13.text = data.isbn13
         lbPages.text = data.pages
         lbYear.text = data.year
-        lbRating.text = data.rating
+        setStar(num: Int(data.rating ?? "0")!)
         lbDescription.text = data.desc
         lbPrice.text = data.price
         if let img = data.image {
@@ -54,7 +67,35 @@ class DetailBookViewController: UIViewController {
         }
     }
     
-  
+    private func saveMemo(){
+        if let data = bookData, let isbn13 = data.isbn13 {
+            if tvMemo.text.count != 0 {
+                UserDefaults.standard.set(tvMemo.text, forKey: isbn13)
+            }
+        }
+    }
+    
+    private func getMemo() {
+        if let data = bookData, let isbn13 = data.isbn13 {
+            if let memo = UserDefaults.standard.string(forKey: isbn13) {
+                tvMemo.text = memo
+            }
+        }
+    }
+    
+    private func setStar(num: Int){
+        let stars : [UIImageView] = [ratingStar0,ratingStar1,ratingStar2,ratingStar3,ratingStar4]
+        for index in 0..<num {
+            stars[index].image = UIImage(systemName: "star.fill")
+        }
+    }
+    
+    @IBAction func actionMoveToLink(_ sender: Any) {
+        if let data = bookData, let url = data.url{
+            let safariVC = SFSafariViewController(url: URL(string: url)!)
+            self.present(safariVC, animated: true, completion: nil)
+        }
+    }
 }
 extension DetailBookViewController {
     private func addKeyboardNotification() {
@@ -89,4 +130,5 @@ extension DetailBookViewController {
       }
     }
 }
+
  

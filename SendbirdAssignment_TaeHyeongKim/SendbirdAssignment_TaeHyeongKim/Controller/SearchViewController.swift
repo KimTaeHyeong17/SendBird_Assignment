@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class SearchViewController: UIViewController {
     
@@ -101,7 +102,6 @@ class SearchViewController: UIViewController {
     
     private func fetchMorePage(keyword: String) {
         DispatchQueue.global(qos: .background).async {
-            
             SearchResultManager.shared.getSearchResult(
                 keyword: keyword,
                 page: self.currentPage
@@ -144,8 +144,8 @@ class SearchViewController: UIViewController {
     }
 }
 extension SearchViewController: UITableViewDataSourcePrefetching {
+    
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        print(currentPage)
         for indexPath in indexPaths {
             if currentPage < maxPage {
                 if resultArray.count-1 == indexPath.row {
@@ -157,6 +157,7 @@ extension SearchViewController: UITableViewDataSourcePrefetching {
     
 }
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return resultArray.count
     }
@@ -166,11 +167,17 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
             let book = resultArray[indexPath.row]
             cell.selectionStyle = .none
             cell.titleLabel.text = book.title
-            cell.subTitleLabel.text = book.subtitle
+            if book.subtitle?.count == 0 {
+                cell.subTitleLabel.text = "no description available"
+            } else {
+                cell.subTitleLabel.text = book.subtitle
+            }
+            
             cell.isbn13Label.text = book.isbn13
             cell.priceLabel.text = book.price
             cell.imgView.image = nil
-            
+            cell.delegate = self
+            cell.url = book.url
             UrlImageManager.shared.getUrlImage(book.image ?? "") { (image) in
                 cell.imgView.image = image
             }
@@ -217,5 +224,14 @@ extension SearchViewController: UISearchBarDelegate {
             return
         }
         self.searchBooks(keyword: searchBar.text!)
+    }
+}
+extension SearchViewController: OpenSafariViewControllerDelegate {
+    func openSafariViewController(url: String) {
+        guard let url = URL(string: url) else {
+            return
+        }
+        let safariVC = SFSafariViewController(url: url)
+        self.present(safariVC, animated: true, completion: nil)
     }
 }
