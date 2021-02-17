@@ -18,7 +18,7 @@
 - [ ] 준수한 UI
 - [x] 응답에 있는 모든 정보 표시
 - [ ] 코드로 UI를 짜면 가산점 있음
-- [ ] 검색결과를 캐싱해야함 (이미지도 별도로)
+- [x] 검색결과를 캐싱해야함 (이미지도 별도로)
 
 ### Detail ViewController
 - [x] 리스트에서 선택된 책의 모든 detail 을 보여줌
@@ -31,7 +31,7 @@
 
 
 ### TODO
-#### 2/15
+#### 2/15 월
 - [x] 프로젝트 세팅
 - [x] 검색창에 키워드 입력
 - [x] 키워드 검색에 대한 결과 표시
@@ -39,8 +39,25 @@
 - [x] 네트워킹 파트 구현
 - [x] Book API 연동
 - [x] URL이미지 다운 및 캐싱
-#### 2/16
+#### 2/16 화
 - [x] 리스트에서 선택된 책의 모든 detail 을 보여줌
-- [ ] Pagination to search result
-- [ ] caches search result
+- [x] Pagination to search result
+- [x] caches search result
 
+#### 2/17 수
+- [x] 링크 표시하기
+- [x] 책 메모 저장 (UserDefaults)
+- [x] 점수 별점으로 바꾸기
+
+#### 2/18 목
+
+
+#### 2/18 목
+
+
+#### 2/19 금
+
+
+### bugs
+- [ ] keyboard hides the memo textview (bookDetail)
+- [ ] fast scrolling casues book image to flick
