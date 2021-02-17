@@ -21,7 +21,7 @@
 		837E9A2725DA60D300D56BC5 /* BookTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 837E9A2525DA60D300D56BC5 /* BookTableViewCell.xib */; };
 		837E9A2E25DA6B9300D56BC5 /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837E9A2D25DA6B9300D56BC5 /* ImageCacheManager.swift */; };
 		837E9A3325DA794400D56BC5 /* BookDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837E9A3225DA794400D56BC5 /* BookDetailModel.swift */; };
-		837E9A3725DD0C7000D56BC5 /* SearchResultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837E9A3625DD0C7000D56BC5 /* SearchResultManager.swift */; };
+		837E9A3725DD0C7000D56BC5 /* SearchCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837E9A3625DD0C7000D56BC5 /* SearchCacheManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,7 +41,7 @@
 		837E9A2525DA60D300D56BC5 /* BookTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookTableViewCell.xib; sourceTree = "<group>"; };
 		837E9A2D25DA6B9300D56BC5 /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
 		837E9A3225DA794400D56BC5 /* BookDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailModel.swift; sourceTree = "<group>"; };
-		837E9A3625DD0C7000D56BC5 /* SearchResultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultManager.swift; sourceTree = "<group>"; };
+		837E9A3625DD0C7000D56BC5 /* SearchCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCacheManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +78,7 @@
 				837E99F925DA4C2F00D56BC5 /* Storyboard */,
 				837E9A2225DA608B00D56BC5 /* Cell */,
 				837E99F825DA4C1C00D56BC5 /* Controller */,
+				837E9A3E25DD178C00D56BC5 /* CoreData */,
 				837E99FE25DA514300D56BC5 /* Utils */,
 				837E9A3125DA792E00D56BC5 /* Model */,
 				837E99F725DA4C0F00D56BC5 /* Delegate */,
@@ -119,7 +120,7 @@
 				837E99FF25DA514B00D56BC5 /* Extensions.swift */,
 				837E9A0325DA520C00D56BC5 /* Network.swift */,
 				837E9A2D25DA6B9300D56BC5 /* ImageCacheManager.swift */,
-				837E9A3625DD0C7000D56BC5 /* SearchResultManager.swift */,
+				837E9A3625DD0C7000D56BC5 /* SearchCacheManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -140,6 +141,13 @@
 				837E9A3225DA794400D56BC5 /* BookDetailModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		837E9A3E25DD178C00D56BC5 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -217,7 +225,7 @@
 				837E9A0025DA514B00D56BC5 /* Extensions.swift in Sources */,
 				837E9A2E25DA6B9300D56BC5 /* ImageCacheManager.swift in Sources */,
 				837E99B425DA4A6A00D56BC5 /* SearchViewController.swift in Sources */,
-				837E9A3725DD0C7000D56BC5 /* SearchResultManager.swift in Sources */,
+				837E9A3725DD0C7000D56BC5 /* SearchCacheManager.swift in Sources */,
 				837E9A0725DA57B600D56BC5 /* BookSearchedModel.swift in Sources */,
 				837E9A0425DA520C00D56BC5 /* Network.swift in Sources */,
 				837E99B025DA4A6A00D56BC5 /* AppDelegate.swift in Sources */,

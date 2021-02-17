@@ -9,18 +9,17 @@ import UIKit
 
 class SearchViewController: UIViewController {
     
+    //MARK: IBOutlet
     @IBOutlet weak var searchBar: UISearchBar!
-    
     @IBOutlet weak var tableView: UITableView!
-    
     @IBOutlet weak var noResultLabel: UIView!
     
+    //MARK: Global Variables
     private var resultArray: [BookModel] = []
-    
     private var currentPage: Int = 1
-    
     private var maxPage: Int = 1
     
+    //MARK: View Setup
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -38,43 +37,60 @@ class SearchViewController: UIViewController {
         
     }
     
+    private func setSearchListView(data: SearchResultModel){
+        
+        self.maxPage = Int(data.total!)!/10+1 ///one page contains 10 result
+        
+        if let books = data.books {
+            self.resultArray = books
+        }
+        
+        DispatchQueue.main.async { [self] in
+            searchBar.prompt = "total result \(data.total ?? "0") books was found!"
+            if data.books?.count == 0 {
+                noResultLabel.isHidden = false
+            }else {
+                noResultLabel.isHidden = true
+            }
+            tableView.reloadData()
+        }
+    }
+    
+    private func paginationCounter(data: SearchResultModel){
+        if let books = data.books {
+            resultArray.append(contentsOf: books)
+            DispatchQueue.main.async { [self] in
+                currentPage += 1
+                tableView.reloadData()
+            }
+        }
+    }
+    
+    //MARK: API Call
     private func searchBooks(keyword: String) {
         currentPage = 1
         
-        SearchResultManager.shared.getSearchResult(keyword: keyword, page: currentPage) { [weak self] (result) in
+        SearchResultManager.shared.getSearchResult(
+            keyword: keyword,
+            page: currentPage
+        ) { [weak self] (result) in
             // search result 가 cache 에 있을 때
             if let data = result {
-                self?.maxPage = Int(data.total!)!/10+1 ///one page contains 10 result
-                if let books = data.books {
-                    self?.resultArray = books
-                    DispatchQueue.main.async {
-                        self?.searchBar.prompt = "total result \(data.total ?? "0") books was found!"
-                        if books.count == 0 {
-                            self?.noResultLabel.isHidden = false
-                        }else {
-                            self?.noResultLabel.isHidden = true
-                        }
-                        self?.tableView.reloadData()
-                    }
-                }
+                
+                self?.setSearchListView(data: data)
+                
             } else {// search result 가 cache에 없을 때
-                NetworkService.shared.getSearchResult(keyword: keyword, page: self!.currentPage) { [weak self] (result) in
+                NetworkService.shared.getSearchResult(
+                    keyword: keyword,
+                    page: self!.currentPage
+                ) { [weak self] (result) in
                     switch result {
                     case .success(let data):
-                        SearchResultManager.shared.saveSearchResult(keyword: keyword, page: self!.currentPage, data: data)
-                        self?.maxPage = Int(data.total!)!/10+1 ///one page contains 10 result
-                        if let books = data.books {
-                            self?.resultArray = books
-                            DispatchQueue.main.async {
-                                self?.searchBar.prompt = "total result \(data.total ?? "0") books was found!"
-                                if books.count == 0 {
-                                    self?.noResultLabel.isHidden = false
-                                }else {
-                                    self?.noResultLabel.isHidden = true
-                                }
-                                self?.tableView.reloadData()
-                            }
-                        }
+                        SearchResultManager.shared
+                            .saveSearchResult(keyword: keyword, page: self!.currentPage, data: data)
+                        
+                        self?.setSearchListView(data: data)
+                        
                     case .failure(let err):
                         print(err.localizedDescription)
                     }
@@ -85,28 +101,22 @@ class SearchViewController: UIViewController {
     
     private func fetchMorePage(keyword: String) {
         DispatchQueue.global(qos: .background).async {
-            SearchResultManager.shared.getSearchResult(keyword: keyword, page: self.currentPage) { [weak self] (result) in
+            
+            SearchResultManager.shared.getSearchResult(
+                keyword: keyword,
+                page: self.currentPage
+            ) { [weak self] (result) in
                 // search result 가 cache 에 있을 때
                 if let data = result {
-                    if let books = data.books {
-                        self?.resultArray.append(contentsOf: books)
-                        DispatchQueue.main.async {
-                            self?.currentPage += 1
-                            self?.tableView.reloadData()
-                        }
-                    }
+                    
+                    self?.paginationCounter(data: data)
+                    
                 } else {// search result 가 cache에 없을 때
                     NetworkService.shared.getSearchResult(keyword: keyword, page: self!.currentPage) { [weak self] (result) in
                         switch result {
                         case .success(let data):
                             SearchResultManager.shared.saveSearchResult(keyword: keyword, page: self!.currentPage, data: data)
-                            if let books = data.books {
-                                self?.resultArray.append(contentsOf: books)
-                                DispatchQueue.main.async {
-                                    self?.currentPage += 1
-                                    self?.tableView.reloadData()
-                                }
-                            }
+                            self?.paginationCounter(data: data)
                         case .failure(let err):
                             print(err.localizedDescription)
                         }
