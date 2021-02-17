@@ -25,5 +25,9 @@ class BookTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    override func prepareForReuse() {
+        //request cancel
+        imgView.image = nil
+    }
     
 }

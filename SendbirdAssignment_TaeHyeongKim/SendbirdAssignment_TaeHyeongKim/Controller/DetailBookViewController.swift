@@ -25,12 +25,12 @@ class DetailBookViewController: UIViewController {
     @IBOutlet weak var lbPrice: UILabel!
     @IBOutlet weak var tvMemo: UITextView!
     
-    var isbn13: String = ""
+    var bookData: BookDetailModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setBookDetail(data: bookData!)
         self.hideKeyboardWhenTappedAround()
-        fetchBookDetail(isbn13: isbn13)
         addKeyboardNotification()
     }
     
@@ -48,26 +48,13 @@ class DetailBookViewController: UIViewController {
         lbDescription.text = data.desc
         lbPrice.text = data.price
         if let img = data.image {
-            urlImageManager.shared.getUrlImage(img) { (image) in
+            UrlImageManager.shared.getUrlImage(img) { (image) in
                 self.imgBook.image = image
             }
         }
     }
     
-    private func fetchBookDetail(isbn13: String) {
-        NetworkService.shared.getBookDetail(isbn13: isbn13){ [weak self] (result) in
-            switch result {
-            case .success(let data):
-                DispatchQueue.main.async {
-                    self?.setBookDetail(data: data)
-                }
-            case .failure(let err):
-                print(err.localizedDescription)
-            }
-        }
-    }
-    
-    
+  
 }
 extension DetailBookViewController {
     private func addKeyboardNotification() {

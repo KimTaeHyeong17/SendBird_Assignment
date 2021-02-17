@@ -35,15 +35,16 @@ class SearchViewController: UIViewController {
         let curatingCellNib = UINib(nibName: "BookTableViewCell", bundle: nil)
         self.tableView.register(curatingCellNib, forCellReuseIdentifier: "BookTableViewCell")
         self.noResultLabel.isHidden = true
-
+        
     }
     
     private func searchBooks(keyword: String) {
         currentPage = 1
-        NetworkService.shared.getSearchResult(keyword: keyword, page: currentPage) { [weak self] (result) in
-            switch result {
-            case .success(let data):
-                self?.maxPage = Int(data.total!)!/10+1
+        
+        SearchResultManager.shared.getSearchResult(keyword: keyword, page: currentPage) { [weak self] (result) in
+            // search result 가 cache 에 있을 때
+            if let data = result {
+                self?.maxPage = Int(data.total!)!/10+1 ///one page contains 10 result
                 if let books = data.books {
                     self?.resultArray = books
                     DispatchQueue.main.async {
@@ -56,17 +57,37 @@ class SearchViewController: UIViewController {
                         self?.tableView.reloadData()
                     }
                 }
-            case .failure(let err):
-                print(err.localizedDescription)
+            } else {// search result 가 cache에 없을 때
+                NetworkService.shared.getSearchResult(keyword: keyword, page: self!.currentPage) { [weak self] (result) in
+                    switch result {
+                    case .success(let data):
+                        SearchResultManager.shared.saveSearchResult(keyword: keyword, page: self!.currentPage, data: data)
+                        self?.maxPage = Int(data.total!)!/10+1 ///one page contains 10 result
+                        if let books = data.books {
+                            self?.resultArray = books
+                            DispatchQueue.main.async {
+                                self?.searchBar.prompt = "total result \(data.total ?? "0") books was found!"
+                                if books.count == 0 {
+                                    self?.noResultLabel.isHidden = false
+                                }else {
+                                    self?.noResultLabel.isHidden = true
+                                }
+                                self?.tableView.reloadData()
+                            }
+                        }
+                    case .failure(let err):
+                        print(err.localizedDescription)
+                    }
+                }
             }
         }
     }
     
     private func fetchMorePage(keyword: String) {
         DispatchQueue.global(qos: .background).async {
-            NetworkService.shared.getSearchResult(keyword: keyword, page: self.currentPage) { [weak self] (result) in
-                switch result {
-                case .success(let data):
+            SearchResultManager.shared.getSearchResult(keyword: keyword, page: self.currentPage) { [weak self] (result) in
+                // search result 가 cache 에 있을 때
+                if let data = result {
                     if let books = data.books {
                         self?.resultArray.append(contentsOf: books)
                         DispatchQueue.main.async {
@@ -74,9 +95,40 @@ class SearchViewController: UIViewController {
                             self?.tableView.reloadData()
                         }
                     }
-                case .failure(let err):
-                    print(err.localizedDescription)
+                } else {// search result 가 cache에 없을 때
+                    NetworkService.shared.getSearchResult(keyword: keyword, page: self!.currentPage) { [weak self] (result) in
+                        switch result {
+                        case .success(let data):
+                            SearchResultManager.shared.saveSearchResult(keyword: keyword, page: self!.currentPage, data: data)
+                            if let books = data.books {
+                                self?.resultArray.append(contentsOf: books)
+                                DispatchQueue.main.async {
+                                    self?.currentPage += 1
+                                    self?.tableView.reloadData()
+                                }
+                            }
+                        case .failure(let err):
+                            print(err.localizedDescription)
+                        }
+                    }
                 }
+            }
+        }
+    }
+    
+    private func fetchBookDetail(isbn13: String) {
+        NetworkService.shared.getBookDetail(isbn13: isbn13){ [weak self] (result) in
+            switch result {
+            case .success(let data):
+                DispatchQueue.main.async {
+                    if let vc = self?.storyboard?.instantiateViewController(withIdentifier: "DetailBookViewController") as? DetailBookViewController {
+                        vc.title = "📓 Book Detail"
+                        vc.bookData = data
+                        self?.navigationController?.pushViewController(vc, animated: true)
+                    }
+                }
+            case .failure(let err):
+                print(err.localizedDescription)
             }
         }
     }
@@ -96,22 +148,23 @@ extension SearchViewController: UITableViewDataSourcePrefetching {
 }
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return resultArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "BookTableViewCell") as? BookTableViewCell {
             let book = resultArray[indexPath.row]
+            cell.selectionStyle = .none
             cell.titleLabel.text = book.title
             cell.subTitleLabel.text = book.subtitle
             cell.isbn13Label.text = book.isbn13
             cell.priceLabel.text = book.price
             cell.imgView.image = nil
-            urlImageManager.shared.getUrlImage(book.image ?? "") { (image) in
+            
+            UrlImageManager.shared.getUrlImage(book.image ?? "") { (image) in
                 cell.imgView.image = image
             }
-          
+            
             return cell
         }
         return UITableViewCell()
@@ -122,10 +175,8 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "DetailBookViewController") as? DetailBookViewController,let isbn13 = resultArray[indexPath.row].isbn13 {
-            vc.isbn13 = isbn13
-            vc.title = "📓 Book Detail"
-            self.navigationController?.pushViewController(vc, animated: true)
+        if let isbn13 = resultArray[indexPath.row].isbn13{
+            fetchBookDetail(isbn13: isbn13)
         }
     }
     
@@ -137,7 +188,7 @@ extension SearchViewController: UISearchBarDelegate {
             selector: #selector(self.reload(_:)),
             object: searchBar
         )
-        perform(#selector(self.reload(_:)), with: searchBar, afterDelay: 0.75)
+        perform(#selector(self.reload(_:)), with: searchBar, afterDelay: 0.5)
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {

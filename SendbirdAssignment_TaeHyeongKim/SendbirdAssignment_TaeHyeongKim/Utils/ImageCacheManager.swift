@@ -12,11 +12,11 @@ class ImageCacheManager {
     static let shared = NSCache<NSString, UIImage>()
     
     private init() {}
-
+    
 }
 
-class urlImageManager {
-    static let shared = urlImageManager()
+class UrlImageManager {
+    static let shared = UrlImageManager()
     
     public func getUrlImage(_ url: String, completion: @escaping (UIImage) -> ()) {
         

@@ -26,7 +26,7 @@
                                 </scopeButtonTitles>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4s1-EE-r1Q">
-                                <rect key="frame" x="0.0" y="100" width="414" height="762"/>
+                                <rect key="frame" x="0.0" y="100" width="414" height="796"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="znP-k2-x3m">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="127"/>
@@ -54,9 +54,9 @@
                             <constraint firstItem="2m3-sS-xaB" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="89f-1Q-IN5"/>
                             <constraint firstItem="2m3-sS-xaB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="9SH-bd-Wki"/>
                             <constraint firstItem="4s1-EE-r1Q" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="KzW-L6-lPm"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="4s1-EE-r1Q" secondAttribute="bottom" id="OTg-ZT-W8O"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="4s1-EE-r1Q" secondAttribute="trailing" id="Wcf-2c-i1i"/>
                             <constraint firstAttribute="trailing" secondItem="2m3-sS-xaB" secondAttribute="trailing" id="lch-Tw-7oX"/>
+                            <constraint firstAttribute="bottom" secondItem="4s1-EE-r1Q" secondAttribute="bottom" id="p0g-dS-Qnm"/>
                         </constraints>
                     </view>
                     <connections>
