@@ -16,6 +16,7 @@ class ImageCacheManager {
 }
 
 class UrlImageManager {
+    
     static let shared = UrlImageManager()
     
     public func getUrlImage(_ url: String, completion: @escaping (UIImage) -> ()) {
@@ -23,26 +24,29 @@ class UrlImageManager {
         let cacheKey = NSString(string: url) // 캐시에 사용될 Key 값
         
         if let cachedImage = ImageCacheManager.shared.object(forKey: cacheKey) { // 해당 Key 에 캐시이미지가 저장되어 있으면 이미지를 사용
+            print("\(url) in cache")
             completion(cachedImage)
-        }
-        
-        DispatchQueue.global(qos: .background).async {
-            if let imageUrl = URL(string: url) {
-                URLSession.shared.dataTask(with: imageUrl) { (data, res, err) in
-                    if let _ = err {
+        } else {
+            print("\(url) not in cache")
+            DispatchQueue.global(qos: .background).async {
+                if let imageUrl = URL(string: url) {
+                    URLSession.shared.dataTask(with: imageUrl) { (data, res, err) in
+                        if let _ = err {
+                            DispatchQueue.main.async {
+                                completion(UIImage())
+                            }
+                            return
+                        }
                         DispatchQueue.main.async {
-                            completion(UIImage())
+                            if let data = data, let image = UIImage(data: data) {
+                                ImageCacheManager.shared.setObject(image, forKey: cacheKey) // 다운로드된 이미지를 캐시에 저장
+                                completion(image)
+                            }
                         }
-                        return
-                    }
-                    DispatchQueue.main.async {
-                        if let data = data, let image = UIImage(data: data) {
-                            ImageCacheManager.shared.setObject(image, forKey: cacheKey) // 다운로드된 이미지를 캐시에 저장
-                            completion(image)
-                        }
-                    }
-                }.resume()
+                    }.resume()
+                }
             }
         }
+        
     }
 }

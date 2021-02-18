@@ -39,8 +39,9 @@ class SearchViewController: UIViewController {
     }
     
     private func setSearchListView(data: SearchResultModel){
-        
-        self.maxPage = Int(data.total!)!/10+1 ///one page contains 10 result
+        if let total = data.total {
+            self.maxPage = Int(total)!/10+1
+        }///one page contains 10 result
         
         if let books = data.books {
             self.resultArray = books
@@ -77,7 +78,6 @@ class SearchViewController: UIViewController {
         ) { [weak self] (result) in
             // search result 가 cache 에 있을 때
             if let data = result {
-                
                 self?.setSearchListView(data: data)
                 
             } else {// search result 가 cache에 없을 때
@@ -108,7 +108,6 @@ class SearchViewController: UIViewController {
             ) { [weak self] (result) in
                 // search result 가 cache 에 있을 때
                 if let data = result {
-                    
                     self?.paginationCounter(data: data)
                     
                 } else {// search result 가 cache에 없을 때
@@ -164,6 +163,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "BookTableViewCell") as? BookTableViewCell {
+            
             let book = resultArray[indexPath.row]
             cell.selectionStyle = .none
             cell.titleLabel.text = book.title
@@ -178,6 +178,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
             cell.imgView.image = nil
             cell.delegate = self
             cell.url = book.url
+            cell.imgView?.image = nil
             UrlImageManager.shared.getUrlImage(book.image ?? "") { (image) in
                 cell.imgView.image = image
             }
