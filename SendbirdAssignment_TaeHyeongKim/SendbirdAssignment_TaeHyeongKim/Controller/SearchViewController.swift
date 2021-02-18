@@ -7,23 +7,24 @@
 
 import UIKit
 import SafariServices
+import Combine
 
 class SearchViewController: UIViewController {
+    
+    private var viewModel: SearchResultViewModel!
+    private var cancelables: Set<AnyCancellable> = []
     
     //MARK: IBOutlet
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noResultLabel: UIView!
     
-    //MARK: Global Variables
-    private var resultArray: [BookModel] = []
-    private var currentPage: Int = 1
-    private var maxPage: Int = 1
-    
     //MARK: View Setup
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        setupViewModel()
+        bindViewModel()
     }
     
     private func setup(){
@@ -38,117 +39,47 @@ class SearchViewController: UIViewController {
         
     }
     
-    private func setSearchListView(data: SearchResultModel){
-        if let total = data.total {
-            self.maxPage = Int(total)!/10+1
-        }///one page contains 10 result
-        
-        if let books = data.books {
-            self.resultArray = books
-        }
-        
-        DispatchQueue.main.async { [self] in
-            searchBar.prompt = "total result \(data.total ?? "0") books was found!"
-            if data.books?.count == 0 {
-                noResultLabel.isHidden = false
-            }else {
-                noResultLabel.isHidden = true
-            }
-            tableView.reloadData()
-        }
+    private func setupViewModel(){
+        viewModel = SearchResultViewModel(searchResultModel: [], resultData: SearchResultModel())
     }
     
-    private func paginationCounter(data: SearchResultModel){
-        if let books = data.books {
-            resultArray.append(contentsOf: books)
-            DispatchQueue.main.async { [self] in
-                currentPage += 1
-                tableView.reloadData()
-            }
-        }
-    }
-    
-    //MARK: API Call
-    private func searchBooks(keyword: String) {
-        currentPage = 1
-        
-        SearchResultManager.shared.getSearchResult(
-            keyword: keyword,
-            page: currentPage
-        ) { [weak self] (result) in
-            // search result 가 cache 에 있을 때
-            if let data = result {
-                self?.setSearchListView(data: data)
-                
-            } else {// search result 가 cache에 없을 때
-                NetworkService.shared.getSearchResult(
-                    keyword: keyword,
-                    page: self!.currentPage
-                ) { [weak self] (result) in
-                    switch result {
-                    case .success(let data):
-                        SearchResultManager.shared
-                            .saveSearchResult(keyword: keyword, page: self!.currentPage, data: data)
-                        
-                        self?.setSearchListView(data: data)
-                        
-                    case .failure(let err):
-                        print(err.localizedDescription)
-                    }
+    private func bindViewModel(){
+        let searchResultStream = viewModel.$searchResultArray
+            .sink{ [weak self] _ in
+                DispatchQueue.main.async { [self] in
+                    self?.tableView.reloadData()
                 }
             }
-        }
-    }
-    
-    private func fetchMorePage(keyword: String) {
-        DispatchQueue.global(qos: .background).async {
-            SearchResultManager.shared.getSearchResult(
-                keyword: keyword,
-                page: self.currentPage
-            ) { [weak self] (result) in
-                // search result 가 cache 에 있을 때
-                if let data = result {
-                    self?.paginationCounter(data: data)
+        
+        let resultDataStream = viewModel.$resultData
+            .sink{ [weak self] _ in
+                DispatchQueue.main.async { [self] in
+                    if (self?.searchBar.text!.count)! > 0 {
+                        self?.searchBar.prompt = "total result \(self?.viewModel.resultData.total ?? "0") books was found!"
+                        
+                    }else {
+                        self?.noResultLabel.isHidden = true
+                    }
                     
-                } else {// search result 가 cache에 없을 때
-                    NetworkService.shared.getSearchResult(keyword: keyword, page: self!.currentPage) { [weak self] (result) in
-                        switch result {
-                        case .success(let data):
-                            SearchResultManager.shared.saveSearchResult(keyword: keyword, page: self!.currentPage, data: data)
-                            self?.paginationCounter(data: data)
-                        case .failure(let err):
-                            print(err.localizedDescription)
-                        }
+                    if self?.viewModel.resultData.books?.count == 0 {
+                        self?.noResultLabel.isHidden = false
+                    }else {
+                        self?.noResultLabel.isHidden = true
                     }
                 }
             }
-        }
+        cancelables.insert(searchResultStream)
+        cancelables.insert(resultDataStream)
     }
     
-    private func fetchBookDetail(isbn13: String) {
-        NetworkService.shared.getBookDetail(isbn13: isbn13){ [weak self] (result) in
-            switch result {
-            case .success(let data):
-                DispatchQueue.main.async {
-                    if let vc = self?.storyboard?.instantiateViewController(withIdentifier: "DetailBookViewController") as? DetailBookViewController {
-                        vc.title = "📓 Book Detail"
-                        vc.bookData = data
-                        self?.navigationController?.pushViewController(vc, animated: true)
-                    }
-                }
-            case .failure(let err):
-                print(err.localizedDescription)
-            }
-        }
-    }
 }
 extension SearchViewController: UITableViewDataSourcePrefetching {
     
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         for indexPath in indexPaths {
-            if currentPage < maxPage {
-                if resultArray.count-1 == indexPath.row {
-                    fetchMorePage(keyword: searchBar.text!)
+            if viewModel.currentPage < viewModel.maxPage {
+                if viewModel.searchResultArray.count-1 == indexPath.row {
+                    viewModel.fetchMorePage(keyword: searchBar.text!)
                 }
             }
         }
@@ -158,13 +89,13 @@ extension SearchViewController: UITableViewDataSourcePrefetching {
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return resultArray.count
+        return viewModel.searchResultArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "BookTableViewCell") as? BookTableViewCell {
             
-            let book = resultArray[indexPath.row]
+            let book = viewModel.searchResultArray[indexPath.row]
             cell.selectionStyle = .none
             cell.titleLabel.text = book.title
             if book.subtitle?.count == 0 {
@@ -193,13 +124,22 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let isbn13 = resultArray[indexPath.row].isbn13{
-            fetchBookDetail(isbn13: isbn13)
+        if let isbn13 = viewModel.searchResultArray[indexPath.row].isbn13{
+            viewModel.fetchBookDetail(isbn13: isbn13) { [weak self] (data) in
+                DispatchQueue.main.async {
+                    if let vc = self?.storyboard?.instantiateViewController(withIdentifier: "DetailBookViewController") as? DetailBookViewController {
+                        vc.title = "📓 Book Detail"
+                        vc.bookData = data
+                        self?.navigationController?.pushViewController(vc, animated: true)
+                    }
+                }
+            }
         }
     }
     
 }
 extension SearchViewController: UISearchBarDelegate {
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         NSObject.cancelPreviousPerformRequests(
             withTarget: self,
@@ -219,15 +159,16 @@ extension SearchViewController: UISearchBarDelegate {
     
     @objc func reload(_ searchBar: UISearchBar) {
         guard let query = searchBar.text, query.trimmingCharacters(in: .whitespaces) != "" else {
-            resultArray.removeAll()
+            viewModel.removeResult()
             tableView.reloadData()
             searchBar.prompt = nil
             return
         }
-        self.searchBooks(keyword: searchBar.text!)
+        viewModel.searchBooks(keyword: searchBar.text!)
     }
 }
 extension SearchViewController: OpenSafariViewControllerDelegate {
+    
     func openSafariViewController(url: String) {
         guard let url = URL(string: url) else {
             return

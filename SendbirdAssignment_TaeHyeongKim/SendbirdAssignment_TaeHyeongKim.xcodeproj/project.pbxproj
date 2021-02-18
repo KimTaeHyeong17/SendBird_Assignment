@@ -23,6 +23,7 @@
 		837E9A3325DA794400D56BC5 /* BookDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837E9A3225DA794400D56BC5 /* BookDetailModel.swift */; };
 		837E9A3725DD0C7000D56BC5 /* SearchCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837E9A3625DD0C7000D56BC5 /* SearchCacheManager.swift */; };
 		837E9A4125DD472C00D56BC5 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837E9A4025DD472C00D56BC5 /* Protocols.swift */; };
+		837E9A4C25DE4AAF00D56BC5 /* SearchResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837E9A4B25DE4AAF00D56BC5 /* SearchResultViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		837E9A3225DA794400D56BC5 /* BookDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailModel.swift; sourceTree = "<group>"; };
 		837E9A3625DD0C7000D56BC5 /* SearchCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCacheManager.swift; sourceTree = "<group>"; };
 		837E9A4025DD472C00D56BC5 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		837E9A4B25DE4AAF00D56BC5 /* SearchResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,7 +82,7 @@
 				837E99F925DA4C2F00D56BC5 /* Storyboard */,
 				837E9A2225DA608B00D56BC5 /* Cell */,
 				837E99F825DA4C1C00D56BC5 /* Controller */,
-				837E9A3E25DD178C00D56BC5 /* CoreData */,
+				837E9A4E25DE574700D56BC5 /* ViewModel */,
 				837E99FE25DA514300D56BC5 /* Utils */,
 				837E9A3125DA792E00D56BC5 /* Model */,
 				837E99F725DA4C0F00D56BC5 /* Delegate */,
@@ -146,11 +148,12 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		837E9A3E25DD178C00D56BC5 /* CoreData */ = {
+		837E9A4E25DE574700D56BC5 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				837E9A4B25DE4AAF00D56BC5 /* SearchResultViewModel.swift */,
 			);
-			path = CoreData;
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,6 +235,7 @@
 				837E9A3725DD0C7000D56BC5 /* SearchCacheManager.swift in Sources */,
 				837E9A0725DA57B600D56BC5 /* BookSearchedModel.swift in Sources */,
 				837E9A0425DA520C00D56BC5 /* Network.swift in Sources */,
+				837E9A4C25DE4AAF00D56BC5 /* SearchResultViewModel.swift in Sources */,
 				837E99B025DA4A6A00D56BC5 /* AppDelegate.swift in Sources */,
 				837E9A3325DA794400D56BC5 /* BookDetailModel.swift in Sources */,
 				837E99F525DA4C0600D56BC5 /* DetailBookViewController.swift in Sources */,

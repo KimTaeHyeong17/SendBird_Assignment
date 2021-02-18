@@ -24,10 +24,8 @@ class UrlImageManager {
         let cacheKey = NSString(string: url) // 캐시에 사용될 Key 값
         
         if let cachedImage = ImageCacheManager.shared.object(forKey: cacheKey) { // 해당 Key 에 캐시이미지가 저장되어 있으면 이미지를 사용
-            print("\(url) in cache")
             completion(cachedImage)
         } else {
-            print("\(url) not in cache")
             DispatchQueue.global(qos: .background).async {
                 if let imageUrl = URL(string: url) {
                     URLSession.shared.dataTask(with: imageUrl) { (data, res, err) in
