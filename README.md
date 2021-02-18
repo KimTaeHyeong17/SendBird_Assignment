@@ -50,14 +50,15 @@
 - [x] 점수 별점으로 바꾸기
 
 #### 2/18 목
-
-
-#### 2/18 목
-
+- [x] fast scrolling causes book image to flickering fix
+- [x] Combine + MVVM 적용 
 
 #### 2/19 금
 
 
+#### 2/20 토
+
+
 ### bugs
-- [ ] keyboard hides the memo textview (bookDetail)
-- [ ] fast scrolling casues book image to flick
+- [x] keyboard hides the memo textview (bookDetail)
+- [x] fast scrolling causes book image to flick
