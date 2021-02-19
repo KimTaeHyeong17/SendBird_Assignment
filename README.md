@@ -54,11 +54,14 @@
 - [x] Combine + MVVM 적용 
 
 #### 2/19 금
-
+- [x] 이미지 디스크 캐싱 레이어 추가 
 
 #### 2/20 토
 
 
+#### 2/21 일
+
 ### bugs
 - [x] keyboard hides the memo textview (bookDetail)
-- [x] fast scrolling causes book image to flick
+- [x] fast scrolling causes book image to flick (cache에 있어도 image fetch 했었음)
+- [x] Book API maximum page is 100 (result 4500개 있어도 한장당 10개 결과 최대 100페이지까지만 되고 101페이지 호출하면 1페이지 리턴함)
