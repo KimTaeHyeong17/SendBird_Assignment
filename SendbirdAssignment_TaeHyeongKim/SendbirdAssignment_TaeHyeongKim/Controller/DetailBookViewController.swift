@@ -44,7 +44,7 @@ class DetailBookViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-       saveMemo()
+        saveMemo()
     }
     
     private func setBookDetail(data: BookDetailModel){
@@ -61,9 +61,10 @@ class DetailBookViewController: UIViewController {
         lbDescription.text = data.desc
         lbPrice.text = data.price
         if let img = data.image {
-            UrlImageManager.shared.getUrlImage(img) { (image) in
+            UrlImageManager.shared.getImage(url: img) { (image) in
                 self.imgBook.image = image
             }
+            
         }
     }
     
@@ -100,35 +101,35 @@ class DetailBookViewController: UIViewController {
 extension DetailBookViewController {
     private func addKeyboardNotification() {
         NotificationCenter.default.addObserver(
-          self,
-          selector: #selector(keyboardWillShow),
-          name: UIResponder.keyboardWillShowNotification,
-          object: nil
+            self,
+            selector: #selector(keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
         )
         
         NotificationCenter.default.addObserver(
-          self,
-          selector: #selector(keyboardWillHide),
-          name: UIResponder.keyboardWillHideNotification,
-          object: nil
+            self,
+            selector: #selector(keyboardWillHide),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
         )
-      }
+    }
     
     @objc private func keyboardWillShow(_ notification: Notification) {
-      if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-        let keybaordRectangle = keyboardFrame.cgRectValue
-        let keyboardHeight = keybaordRectangle.height
-        containerView.frame.origin.y -= keyboardHeight
-      }
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keybaordRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keybaordRectangle.height
+            containerView.frame.origin.y -= keyboardHeight
+        }
     }
-      
+    
     @objc private func keyboardWillHide(_ notification: Notification) {
-      if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-        let keybaordRectangle = keyboardFrame.cgRectValue
-        let keyboardHeight = keybaordRectangle.height
-        containerView.frame.origin.y += keyboardHeight
-      }
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keybaordRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keybaordRectangle.height
+            containerView.frame.origin.y += keyboardHeight
+        }
     }
 }
 
- 
+

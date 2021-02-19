@@ -36,7 +36,6 @@ class SearchResultViewModel: ObservableObject {
         if let books = data.books {
             searchResultArray.append(contentsOf: books)
                 currentPage += 1
-            
         }
     }
     
@@ -85,7 +84,6 @@ class SearchResultViewModel: ObservableObject {
                 // search result 가 cache 에 있을 때
                 if let data = result {
                     self?.paginationCounter(data: data)
-                    
                 } else {// search result 가 cache에 없을 때
                     NetworkService.shared.getSearchResult(keyword: keyword, page: self!.currentPage) { [weak self] (result) in
                         switch result {

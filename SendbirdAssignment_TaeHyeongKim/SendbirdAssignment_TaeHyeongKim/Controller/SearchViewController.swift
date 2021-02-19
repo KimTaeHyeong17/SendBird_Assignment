@@ -110,9 +110,12 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
             cell.delegate = self
             cell.url = book.url
             cell.imgView?.image = nil
-            UrlImageManager.shared.getUrlImage(book.image ?? "") { (image) in
-                cell.imgView.image = image
+            if let url = book.image {
+                UrlImageManager.shared.getImage(url: url) { (image) in
+                    cell.imgView.image = image
+                }
             }
+          
             
             return cell
         }
