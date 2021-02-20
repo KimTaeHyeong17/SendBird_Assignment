@@ -15,7 +15,7 @@
 ### Search ViewController
 - [x] 검색창에 키워드 입력
 - [x] 키워드 검색에 대한 결과 표시
-- [ ] 준수한 UI
+- [x] 준수한 UI
 - [x] 응답에 있는 모든 정보 표시
 - [ ] 코드로 UI를 짜면 가산점 있음
 - [x] 검색결과를 캐싱해야함 (이미지도 별도로)
@@ -54,14 +54,30 @@
 - [x] Combine + MVVM 적용 
 
 #### 2/19 금
-- [x] 이미지 디스크 캐싱 레이어 추가 
+- [x] 이미지 디스크 캐싱 레이어 추가(file manager)
 
 #### 2/20 토
+- [x] 검색결과 디스크 캐싱 (using coredata)
 
 
 #### 2/21 일
+- [ ] 버그픽스
+
+
+#### 2/22 월
+- [ ] 제출
+
+
 
 ### bugs
 - [x] keyboard hides the memo textview (bookDetail)
 - [x] fast scrolling causes book image to flick (cache에 있어도 image fetch 했었음)
 - [x] Book API maximum page is 100 (result 4500개 있어도 한장당 10개 결과 최대 100페이지까지만 되고 101페이지 호출하면 1페이지 리턴함)
+- [ ] sometimes there are more results to load but scroll stop
+- [ ] (after adding core data) first page 10 element duplication in tableview
+- [ ] (after adding core data) error: Serious application error. Exception was caught during Core Data change processing. (moving to detailViewController while saving to coreData?) 
+- [ ] (after adding core data) blank cell appear sometimes
+
+
+### 개선해야 하는 것
+- [ ] 캐싱 데이터 바뀌었을 경우 E-Tag등 활용해 update 해야함
