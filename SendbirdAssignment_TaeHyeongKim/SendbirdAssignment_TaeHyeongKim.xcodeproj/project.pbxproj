@@ -24,6 +24,12 @@
 		837E9A3725DD0C7000D56BC5 /* SearchCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837E9A3625DD0C7000D56BC5 /* SearchCacheManager.swift */; };
 		837E9A4125DD472C00D56BC5 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837E9A4025DD472C00D56BC5 /* Protocols.swift */; };
 		837E9A4C25DE4AAF00D56BC5 /* SearchResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837E9A4B25DE4AAF00D56BC5 /* SearchResultViewModel.swift */; };
+		837E9A8425E0D00100D56BC5 /* BookModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837E9A8325E0D00100D56BC5 /* BookModel.swift */; };
+		837E9A8A25E138C900D56BC5 /* DiskCache.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 837E9A8825E138C900D56BC5 /* DiskCache.xcdatamodeld */; };
+		837E9AEF25E16BA000D56BC5 /* SearchResultEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837E9AEB25E16BA000D56BC5 /* SearchResultEntity+CoreDataClass.swift */; };
+		837E9AF025E16BA000D56BC5 /* SearchResultEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837E9AEC25E16BA000D56BC5 /* SearchResultEntity+CoreDataProperties.swift */; };
+		837E9AF125E16BA000D56BC5 /* BookModelEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837E9AED25E16BA000D56BC5 /* BookModelEntity+CoreDataClass.swift */; };
+		837E9AF225E16BA000D56BC5 /* BookModelEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837E9AEE25E16BA000D56BC5 /* BookModelEntity+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +52,12 @@
 		837E9A3625DD0C7000D56BC5 /* SearchCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCacheManager.swift; sourceTree = "<group>"; };
 		837E9A4025DD472C00D56BC5 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		837E9A4B25DE4AAF00D56BC5 /* SearchResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewModel.swift; sourceTree = "<group>"; };
+		837E9A8325E0D00100D56BC5 /* BookModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookModel.swift; sourceTree = "<group>"; };
+		837E9A8925E138C900D56BC5 /* DiskCache.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DiskCache.xcdatamodel; sourceTree = "<group>"; };
+		837E9AEB25E16BA000D56BC5 /* SearchResultEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchResultEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		837E9AEC25E16BA000D56BC5 /* SearchResultEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchResultEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		837E9AED25E16BA000D56BC5 /* BookModelEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookModelEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		837E9AEE25E16BA000D56BC5 /* BookModelEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookModelEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +97,7 @@
 				837E9A4E25DE574700D56BC5 /* ViewModel */,
 				837E99FE25DA514300D56BC5 /* Utils */,
 				837E9A3125DA792E00D56BC5 /* Model */,
+				837E9A5125E0CB9A00D56BC5 /* CoreData */,
 				837E99F725DA4C0F00D56BC5 /* Delegate */,
 				837E99B825DA4A7600D56BC5 /* Assets.xcassets */,
 			);
@@ -144,6 +157,7 @@
 			children = (
 				837E9A0625DA57B600D56BC5 /* BookSearchedModel.swift */,
 				837E9A3225DA794400D56BC5 /* BookDetailModel.swift */,
+				837E9A8325E0D00100D56BC5 /* BookModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -154,6 +168,18 @@
 				837E9A4B25DE4AAF00D56BC5 /* SearchResultViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		837E9A5125E0CB9A00D56BC5 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				837E9A8825E138C900D56BC5 /* DiskCache.xcdatamodeld */,
+				837E9AEB25E16BA000D56BC5 /* SearchResultEntity+CoreDataClass.swift */,
+				837E9AEC25E16BA000D56BC5 /* SearchResultEntity+CoreDataProperties.swift */,
+				837E9AED25E16BA000D56BC5 /* BookModelEntity+CoreDataClass.swift */,
+				837E9AEE25E16BA000D56BC5 /* BookModelEntity+CoreDataProperties.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -227,18 +253,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				837E9AF025E16BA000D56BC5 /* SearchResultEntity+CoreDataProperties.swift in Sources */,
+				837E9A8425E0D00100D56BC5 /* BookModel.swift in Sources */,
 				837E9A2625DA60D300D56BC5 /* BookTableViewCell.swift in Sources */,
 				837E9A0025DA514B00D56BC5 /* Extensions.swift in Sources */,
 				837E9A2E25DA6B9300D56BC5 /* ImageCacheManager.swift in Sources */,
 				837E9A4125DD472C00D56BC5 /* Protocols.swift in Sources */,
 				837E99B425DA4A6A00D56BC5 /* SearchViewController.swift in Sources */,
 				837E9A3725DD0C7000D56BC5 /* SearchCacheManager.swift in Sources */,
+				837E9AEF25E16BA000D56BC5 /* SearchResultEntity+CoreDataClass.swift in Sources */,
+				837E9AF125E16BA000D56BC5 /* BookModelEntity+CoreDataClass.swift in Sources */,
 				837E9A0725DA57B600D56BC5 /* BookSearchedModel.swift in Sources */,
 				837E9A0425DA520C00D56BC5 /* Network.swift in Sources */,
+				837E9AF225E16BA000D56BC5 /* BookModelEntity+CoreDataProperties.swift in Sources */,
 				837E9A4C25DE4AAF00D56BC5 /* SearchResultViewModel.swift in Sources */,
 				837E99B025DA4A6A00D56BC5 /* AppDelegate.swift in Sources */,
 				837E9A3325DA794400D56BC5 /* BookDetailModel.swift in Sources */,
 				837E99F525DA4C0600D56BC5 /* DetailBookViewController.swift in Sources */,
+				837E9A8A25E138C900D56BC5 /* DiskCache.xcdatamodeld in Sources */,
 				837E99B225DA4A6A00D56BC5 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -441,6 +473,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		837E9A8825E138C900D56BC5 /* DiskCache.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				837E9A8925E138C900D56BC5 /* DiskCache.xcdatamodel */,
+			);
+			currentVersion = 837E9A8925E138C900D56BC5 /* DiskCache.xcdatamodel */;
+			path = DiskCache.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 837E99A425DA4A6A00D56BC5 /* Project object */;
 }

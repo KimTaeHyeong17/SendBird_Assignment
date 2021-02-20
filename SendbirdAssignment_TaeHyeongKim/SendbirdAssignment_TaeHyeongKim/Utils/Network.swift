@@ -144,7 +144,7 @@ struct NetworkService {
     
     let session = URLSession(configuration: .default)
     
-    func getSearchResult(keyword: String ,page: Int,  _ completion: @escaping (Result<SearchResultModel>) -> ()) {
+    func getSearchResult(keyword: String ,page: Int,  _ completion: @escaping (Result<BookSearchModel>) -> ()) {
         do {
             let request = try HTTPNetworkRequest.configureHTTPRequest(
                 from: .searchBook(query: keyword,page: page), with: nil, includes: nil, contains: nil, and: .get)
@@ -154,7 +154,7 @@ struct NetworkService {
                     let result = HTTPNetworkResponse.handleNetworkResponse(for: response)
                     switch result {
                     case .success:
-                        let result = try? JSONDecoder().decode(SearchResultModel.self, from: unwrappedData)
+                        let result = try? JSONDecoder().decode(BookSearchModel.self, from: unwrappedData)
                         completion(Result.success(result!))
                     case .failure:
                         completion(Result.failure(HTTPNetworkError.badRequest))

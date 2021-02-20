@@ -11,17 +11,17 @@ import Combine
 class SearchResultViewModel: ObservableObject {
     
     @Published var searchResultArray: [BookModel]
-    @Published var resultData: SearchResultModel
+    @Published var resultData: BookSearchModel
     
     public var currentPage: Int = 1
     public var maxPage: Int = 1
     
-    init(searchResultModel:  [BookModel], resultData: SearchResultModel) {
+    init(searchResultModel:  [BookModel], resultData: BookSearchModel) {
         self.searchResultArray = searchResultModel
         self.resultData = resultData
     }
     
-    private func setSearchListView(data: SearchResultModel){
+    private func setSearchListView(data: BookSearchModel){
         resultData = data
         if let total = data.total {
             self.maxPage = Int(total)!/10+1
@@ -32,7 +32,7 @@ class SearchResultViewModel: ObservableObject {
         }
     }
     
-    private func paginationCounter(data: SearchResultModel){
+    private func paginationCounter(data: BookSearchModel){
         if let books = data.books {
             searchResultArray.append(contentsOf: books)
                 currentPage += 1
@@ -47,23 +47,23 @@ class SearchResultViewModel: ObservableObject {
     public func searchBooks(keyword: String) {
         currentPage = 1
         
-        SearchResultManager.shared.getSearchResult(
+        SearchResultManager.shared.getSearchResultFromCache(
             keyword: keyword,
             page: currentPage
         ) { [weak self] (result) in
-            // search result 가 cache 에 있을 때
+            // search result 가 cache(disk + memory) 에 있을 때
             if let data = result {
-                
                 self?.setSearchListView(data: data)
+                
             } else {// search result 가 cache에 없을 때
-                NetworkService.shared.getSearchResult(
-                    keyword: keyword,
-                    page: self!.currentPage
-                ) { [weak self] (result) in
+                NetworkService.shared.getSearchResult(keyword: keyword,page: self!.currentPage) { [weak self] (result) in
                     switch result {
                     case .success(let data):
+                        print("get from url        \(self?.currentPage ?? -1)")
                         SearchResultManager.shared
-                            .saveSearchResult(keyword: keyword, page: self!.currentPage, data: data)
+                            .saveAtMemory(keyword: keyword, page: self!.currentPage, data: data)
+                        SearchResultManager.shared
+                            .saveAtDisk(keyword: keyword, page: self!.currentPage, data: data)
                         
                         self?.setSearchListView(data: data)
                         
@@ -77,18 +77,23 @@ class SearchResultViewModel: ObservableObject {
     
     public func fetchMorePage(keyword: String) {
         DispatchQueue.global(qos: .background).async {
-            SearchResultManager.shared.getSearchResult(
+            SearchResultManager.shared.getSearchResultFromCache(
                 keyword: keyword,
                 page: self.currentPage
             ) { [weak self] (result) in
-                // search result 가 cache 에 있을 때
+                // search result 가 cache(disk + memory) 에 있을 때
                 if let data = result {
                     self?.paginationCounter(data: data)
+                    
                 } else {// search result 가 cache에 없을 때
                     NetworkService.shared.getSearchResult(keyword: keyword, page: self!.currentPage) { [weak self] (result) in
                         switch result {
                         case .success(let data):
-                            SearchResultManager.shared.saveSearchResult(keyword: keyword, page: self!.currentPage, data: data)
+                            print("get more from url        \(self?.currentPage ?? -1)")
+                            SearchResultManager.shared
+                                .saveAtMemory(keyword: keyword, page: self!.currentPage, data: data)
+                            SearchResultManager.shared
+                                .saveAtDisk(keyword: keyword, page: self!.currentPage, data: data)
                             self?.paginationCounter(data: data)
                         case .failure(let err):
                             print(err.localizedDescription)

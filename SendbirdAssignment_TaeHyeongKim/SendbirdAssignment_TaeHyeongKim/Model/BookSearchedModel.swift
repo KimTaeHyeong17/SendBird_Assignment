@@ -6,17 +6,11 @@
 //
 
 import Foundation
+import CoreData
 
-struct SearchResultModel: Decodable {
+struct BookSearchModel: Decodable {
     var total: String?
     var page: String?
     var books: [BookModel]?
-}
-struct BookModel: Decodable {
-    var title: String?
-    var subtitle: String?
-    var isbn13: String?
-    var image: String?
-    var url: String?
-    var price: String?
+
 }

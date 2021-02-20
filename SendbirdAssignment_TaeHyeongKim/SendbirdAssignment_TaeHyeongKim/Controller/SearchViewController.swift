@@ -40,7 +40,7 @@ class SearchViewController: UIViewController {
     }
     
     private func setupViewModel(){
-        viewModel = SearchResultViewModel(searchResultModel: [], resultData: SearchResultModel())
+        viewModel = SearchResultViewModel(searchResultModel: [], resultData: BookSearchModel())
     }
     
     private func bindViewModel(){
@@ -77,6 +77,7 @@ extension SearchViewController: UITableViewDataSourcePrefetching {
     
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         for indexPath in indexPaths {
+            print(viewModel.currentPage, viewModel.maxPage)
             if viewModel.currentPage < viewModel.maxPage {
                 if viewModel.searchResultArray.count-1 == indexPath.row {
                     viewModel.fetchMorePage(keyword: searchBar.text!)

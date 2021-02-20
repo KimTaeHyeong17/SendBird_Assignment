@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20D64" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="BookModelEntity" representedClassName="BookModelEntity" syncable="YES">
+        <attribute name="image" optional="YES" attributeType="String"/>
+        <attribute name="isbn13" optional="YES" attributeType="String"/>
+        <attribute name="price" optional="YES" attributeType="String"/>
+        <attribute name="subtitle" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="url" optional="YES" attributeType="String"/>
+        <relationship name="origin" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SearchResultEntity" inverseName="books" inverseEntity="SearchResultEntity"/>
+    </entity>
+    <entity name="SearchResultEntity" representedClassName="SearchResultEntity" syncable="YES">
+        <attribute name="keyword" optional="YES" attributeType="String"/>
+        <attribute name="page" optional="YES" attributeType="String"/>
+        <attribute name="total" optional="YES" attributeType="String"/>
+        <relationship name="books" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="BookModelEntity" inverseName="origin" inverseEntity="BookModelEntity"/>
+    </entity>
+    <elements>
+        <element name="BookModelEntity" positionX="18" positionY="72" width="128" height="148"/>
+        <element name="SearchResultEntity" positionX="73.4434814453125" positionY="196.676513671875" width="128" height="103"/>
+    </elements>
+</model>

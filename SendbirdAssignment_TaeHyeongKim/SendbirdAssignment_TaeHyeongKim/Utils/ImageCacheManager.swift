@@ -20,26 +20,26 @@ class UrlImageManager {
     static let shared = UrlImageManager()
     
     public func getImage(url: String, completion: @escaping (UIImage) -> ()) {
-        //get from memory cache
+        ///get from memory cache
         getImageFromMemory(url) { (image) in
             if let image = image {
-                print("get from memory     \(url)")
+//                print("get from memory     \(url)")
                 completion(image)
             }else {
-                //get from disk cache
-                //save to memory cache
+                ///get from disk cache
+                ///save to memory cache
                 self.getImageFromDisk(url: url) { (image) in
                     if let image = image {
-                        print("get from disk       \(url)")
+//                        print("get from disk       \(url)")
                         completion(image)
                         self.saveAtMemory(url: url, image: image)
                     }else {
-                        //get from url
-                        //save to disk cahce
-                        //save to memory cache
+                        ///get from url
+                        ///save to disk cahce
+                        ///save to memory cache
                         self.downloadUrlImage(url: url) { (image) in
                             completion(image)
-                            print("download from url   \(url)")
+//                            print("download from url   \(url)")
                             self.saveAtMemory(url: url, image: image)
                             self.saveAtDisk(url: url, image: image)
                         }
@@ -79,7 +79,7 @@ class UrlImageManager {
         DispatchQueue.global(qos: .background).async {
             let cacheKey = NSString(string: url) // 캐시에 사용될 Key 값
             ImageCacheManager.shared.setObject(image, forKey: cacheKey) // 다운로드된 이미지를 캐시에 저장
-            print("save to memory      \(url)")
+//            print("save to memory      \(url)")
         }
     }
     
@@ -92,7 +92,7 @@ class UrlImageManager {
             var filePath = URL(fileURLWithPath: path)
             filePath.appendPathComponent(URL(string:url)!.lastPathComponent)
             fileManager.createFile(atPath: filePath.path, contents: image.pngData() , attributes: nil)
-            print("save to disk        \(filePath)")
+//            print("save to disk        \(filePath)")
         }
     }
     
