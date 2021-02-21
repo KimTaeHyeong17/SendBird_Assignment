@@ -64,7 +64,11 @@ struct HTTPNetworkRequest {
         includes headers: HTTPHeaders,
         contains body: Data?,
         and method: HTTPMethod) throws -> URLRequest {
-        guard let url = URL(string: "https://api.itbook.store/1.0/\(route.url)") else {
+        print(route.url)
+        guard let urlString = "https://api.itbook.store/1.0/\(route.url)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
+            throw HTTPNetworkError.missingURL
+        }
+        guard let url = URL(string: urlString) else {
             throw HTTPNetworkError.missingURL
         }
         var request = URLRequest(url: url, cachePolicy: .reloadIgnoringCacheData, timeoutInterval: 10.0)
@@ -148,7 +152,6 @@ struct NetworkService {
         do {
             let request = try HTTPNetworkRequest.configureHTTPRequest(
                 from: .searchBook(query: keyword,page: page), with: nil, includes: nil, contains: nil, and: .get)
-            
             session.dataTask(with: request){ (data, res, err) in
                 if let response = res as? HTTPURLResponse, let unwrappedData = data {
                     let result = HTTPNetworkResponse.handleNetworkResponse(for: response)
@@ -158,13 +161,17 @@ struct NetworkService {
                         completion(Result.success(result!))
                     case .failure:
                         completion(Result.failure(HTTPNetworkError.badRequest))
-                        
                     }
                 }
             }.resume()
     
         }catch {
-            completion(Result.failure(HTTPNetworkError.badRequest))
+            if error as! HTTPNetworkError == HTTPNetworkError.missingURL {
+                print(error.localizedDescription)
+                completion(Result.failure(HTTPNetworkError.badRequest))
+            }else {
+                
+            }
         }
     }
     

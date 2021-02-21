@@ -167,11 +167,12 @@ extension SearchViewController: UISearchBarDelegate {
             searchBar.prompt = nil
             return
         }
-        if lastSearchedKeyword != query.trimmingCharacters(in: .whitespaces) {
+        if lastSearchedKeyword != query {
             viewModel.removeResult()
         }
-        viewModel.fetchMorePage(keyword: query.trimmingCharacters(in: .whitespaces))
-        lastSearchedKeyword = query.trimmingCharacters(in: .whitespaces)
+        viewModel.fetchMorePage(keyword: query)
+        lastSearchedKeyword = query
+        print("searched keyword \(query)")
     }
 }
 extension SearchViewController: OpenSafariViewControllerDelegate {
