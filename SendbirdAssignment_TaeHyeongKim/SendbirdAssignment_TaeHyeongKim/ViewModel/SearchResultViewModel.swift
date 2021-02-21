@@ -34,8 +34,8 @@ class SearchResultViewModel: ObservableObject {
     }
     
     private func paginationCounter(data: BookSearchModel){
-        if let books = data.books{
-            print("page \(data.page!)")
+        if let books = data.books, let page = data.page{
+            print("page \(page)")
             searchResultArray.append(contentsOf: books)
             currentPage += 1
         }
