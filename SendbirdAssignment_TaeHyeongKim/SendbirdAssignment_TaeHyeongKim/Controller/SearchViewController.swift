@@ -13,6 +13,7 @@ class SearchViewController: UIViewController {
     
     private var viewModel: SearchResultViewModel!
     private var cancelables: Set<AnyCancellable> = []
+    private var lastSearchedKeyword: String = ""
     
     //MARK: IBOutlet
     @IBOutlet weak var searchBar: UISearchBar!
@@ -74,6 +75,7 @@ class SearchViewController: UIViewController {
     
 }
 extension SearchViewController: UITableViewDataSourcePrefetching {
+    
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         for indexPath in indexPaths {
             if viewModel.currentPage < viewModel.maxPage {
@@ -105,10 +107,9 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
             
             cell.isbn13Label.text = book.isbn13
             cell.priceLabel.text = book.price
-            cell.imgView.image = nil
             cell.delegate = self
             cell.url = book.url
-            cell.imgView?.image = nil
+            cell.imgView.image = UIImage(named: "bookPlaceholder")
             if let url = book.image {
                 UrlImageManager.shared.getImage(url: url) { (image) in
                     cell.imgView.image = image
@@ -166,7 +167,11 @@ extension SearchViewController: UISearchBarDelegate {
             searchBar.prompt = nil
             return
         }
-        viewModel.fetchMorePage(keyword: searchBar.text!)
+        if lastSearchedKeyword != query.trimmingCharacters(in: .whitespaces) {
+            viewModel.removeResult()
+        }
+        viewModel.fetchMorePage(keyword: query.trimmingCharacters(in: .whitespaces))
+        lastSearchedKeyword = query.trimmingCharacters(in: .whitespaces)
     }
 }
 extension SearchViewController: OpenSafariViewControllerDelegate {

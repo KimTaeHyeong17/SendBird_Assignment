@@ -61,6 +61,7 @@ class DetailBookViewController: UIViewController {
         lbDescription.text = data.desc
         lbPrice.text = data.price
         if let img = data.image {
+            imgBook.image = UIImage(named: "bookPlaceholder")
             UrlImageManager.shared.getImage(url: img) { (image) in
                 self.imgBook.image = image
             }

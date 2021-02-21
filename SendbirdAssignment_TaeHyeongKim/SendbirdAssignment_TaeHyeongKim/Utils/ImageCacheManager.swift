@@ -103,7 +103,7 @@ class UrlImageManager {
                     if let err = err {
                         print(err.localizedDescription)
                         DispatchQueue.main.async {
-                            completion(UIImage())
+                            completion(UIImage(named: "bookPlaceholder")!)
                         }
                         return
                     }

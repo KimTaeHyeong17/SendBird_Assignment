@@ -77,8 +77,9 @@ class SearchResultViewModel: ObservableObject {
                             self?.setSearchListView(data: data)
                         }else {
                             self?.paginationCounter(data: data)
-                        }                        case .failure(let err):
-                            print(err.localizedDescription)
+                        }
+                    case .failure(let err):
+                        print(err.localizedDescription)
                     }
                 }
             }
