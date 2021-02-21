@@ -61,10 +61,12 @@
 
 
 #### 2/21 일
-- [ ] 버그픽스
+- [x] 버그픽스
+- [x] 로딩 전 이미지 placeholder
 
 
 #### 2/22 월
+- [ ] 코드정리
 - [ ] 제출
 
 
@@ -73,11 +75,22 @@
 - [x] keyboard hides the memo textview (bookDetail)
 - [x] fast scrolling causes book image to flick (cache에 있어도 image fetch 했었음)
 - [x] Book API maximum page is 100 (result 4500개 있어도 한장당 10개 결과 최대 100페이지까지만 되고 101페이지 호출하면 1페이지 리턴함)
-- [ ] sometimes there are more results to load but scroll stop
-- [ ] (after adding core data) first page 10 element duplication in tableview
-- [ ] (after adding core data) error: Serious application error. Exception was caught during Core Data change processing. (moving to detailViewController while saving to coreData?) 
-- [ ] (after adding core data) blank cell appear sometimes
+- [x] (after adding core data) blank cell appear sometimes (check blank cell)
+- [x] sometimes there are more results to load but scroll stop (change pagination method)
+- [x] (after adding core data) first page 10 element duplication in tableview (completion block was in loop and no return or break was specified, )
+```
+viewModel에서 검색하면 먼저 cache 에서 데이터를 찾는 요청 A를 던진다. 
+cache 에 없을 경우 api 에 요청하여 캐시에 저장하는 작업을 B를 진행한다. (이미 tableview 에 키워드 첫페이지 10개 항목 표시)
+B가 끝났는데 A요청은 수행중일 경우 (cache에서 데이터를 가져오는 요청)
+A 가 지금 보니 캐시에 있다 (B가 끝나서)
+B도 그럼 추가한다 (중복생김)
+그게 아니라 1페이지에서 스크롤 안했는데 초기 search 1페이지랑 fetchMore 1페이지가 겹친거였음
+```
+- [x] 검색어에 띄워쓰기 있으면 url 생성에서 에러난다. (api 에서는 가능함)
+
 
 
 ### 개선해야 하는 것
 - [ ] 캐싱 데이터 바뀌었을 경우 E-Tag등 활용해 update 해야함
+- [ ] core data 에서 fetching 할때 keyword와 page 찾는 로직
+- [ ] 화면에 표시되고 있는 이미지 부터 로딩
