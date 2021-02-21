@@ -100,15 +100,21 @@ class SearchResultManager {
                         //                        item.books as BookModelEntity
                         var books = [BookModel]()
                         for book in item.books! {
-                            if let book = book as? BookModelEntity {
+                            if let book = book as? BookModelEntity,
+                               let title = book.title,
+                               let subtitle = book.subtitle,
+                               let isbn13 = book.isbn13,
+                               let image = book.image,
+                               let url = book.url,
+                               let price = book.price {
                                 books.append(
                                     BookModel(
-                                        title: book.title,
-                                        subtitle: book.subtitle,
-                                        isbn13: book.isbn13,
-                                        image: book.image,
-                                        url: book.url,
-                                        price: book.price
+                                        title: title,
+                                        subtitle: subtitle,
+                                        isbn13: isbn13,
+                                        image: image,
+                                        url: url,
+                                        price: price
                                     )
                                 )
                             }
