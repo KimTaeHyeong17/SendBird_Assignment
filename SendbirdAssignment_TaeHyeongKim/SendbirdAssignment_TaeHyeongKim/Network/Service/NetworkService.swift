@@ -17,16 +17,18 @@ struct NetworkService {
         do {
             let request = try HTTPNetworkRequest.configureHTTPRequest(
                 from: .searchBook(query: keyword,page: page), with: nil, includes: nil, contains: nil, and: .get)
+            
             session.dataTask(with: request){ (data, res, err) in
+                
                 if let response = res as? HTTPURLResponse, let unwrappedData = data {
+                    
                     let result = HTTPNetworkResponse.handleNetworkResponse(for: response)
                     switch result {
                     case .success:
                         let result = try? JSONDecoder().decode(BookSearchModel.self, from: unwrappedData)
                         completion(Result.success(result!))
-                    case .failure(let err):
-                        
-                        response.statusCode
+                    case .failure:
+                        print(result.self)
                         completion(Result.failure(HTTPNetworkError.badRequest))
                     }
                 }
@@ -50,8 +52,8 @@ struct NetworkService {
                         let result = try? JSONDecoder().decode(BookDetailModel.self, from: unwrappedData)
                         completion(Result.success(result!))
                     case .failure:
+                        print(result.self)
                         completion(Result.failure(HTTPNetworkError.badRequest))
-                        
                     }
                 }
             }.resume()

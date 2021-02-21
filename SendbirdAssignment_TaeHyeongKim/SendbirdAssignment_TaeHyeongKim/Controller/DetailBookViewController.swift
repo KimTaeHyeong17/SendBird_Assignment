@@ -99,7 +99,7 @@ class DetailBookViewController: UIViewController {
         }
     }
 }
-extension DetailBookViewController {
+extension DetailBookViewController { ///avoid keyboard covering textview
     private func addKeyboardNotification() {
         NotificationCenter.default.addObserver(
             self,

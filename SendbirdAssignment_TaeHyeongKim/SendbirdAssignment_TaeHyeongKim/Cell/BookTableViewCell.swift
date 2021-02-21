@@ -19,7 +19,7 @@ class BookTableViewCell: UITableViewCell {
     @IBOutlet weak var btnLink: UIButton!
     
     public var delegate: OpenSafariViewControllerDelegate?
-    public var url: String?
+    public var url: String? /// for opening book info link
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,7 +31,6 @@ class BookTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     override func prepareForReuse() {
-        //request cancel
         imgView.image = nil
     }
     
@@ -40,6 +39,4 @@ class BookTableViewCell: UITableViewCell {
             delegate?.openSafariViewController(url: url)
         }
     }
-    
-
 }
