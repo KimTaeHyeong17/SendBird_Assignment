@@ -48,7 +48,6 @@ class SearchResultManager {
     }
     
     
-    
     // TODO: add disk cache layer
     public func getSearchResultFromCache(keyword: String, page: Int, completion: @escaping (BookSearchModel?) -> ()) {
         //get from memory cache
@@ -56,25 +55,28 @@ class SearchResultManager {
             if let data = data {
                 print("get from memory     \(page)")
                 completion(data)
+                return
             }else {
-                //                completion(nil)
-                //                get from disk cache
-                //                save to memory cache
-                self.getSearchResultFromDisk(keyword: keyword, page: page) { (data) in
-                    if let data = data {
-                        print("get from disk       \(page)")
-                        completion(data)
-                        self.saveAtMemory(keyword: keyword, page: page, data: data)
-                    }else {
-                        //TODO: get from url and save to disk and memory is done in viewModel
-                        completion(nil)
-                    }
-                }
+                ///get from disk cache
+                ///save to memory cache
+                completion(nil)
+//                self.getSearchResultFromDisk(keyword: keyword, page: page) { (data) in
+//                    if let data = data {
+//                        print("get from disk       \(page)")
+//                        completion(data)
+//                        self.saveAtMemory(keyword: keyword, page: page, data: data)
+//                        return
+//                    }else {
+//                        //TODO: get from url and save to disk and memory is done in viewModel
+//                        completion(nil)
+//                    }
+//                }
             }
         }
     }
     
     private func getSearchResultFromMemory(keyword: String, page: Int, completion: @escaping (BookSearchModel?) -> ()) {
+        
         let cacheKey = NSString(string: "\(keyword)/\(page)")
         
         if let cacheData = SearchResultCacheManager.shared.object(forKey: cacheKey) {
@@ -85,49 +87,45 @@ class SearchResultManager {
     }
     
     private func getSearchResultFromDisk(keyword: String, page: Int, completion: @escaping (BookSearchModel?) -> ()) {
-        DispatchQueue.main.async {
-            
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            let context = appDelegate.persistentContainer.viewContext
-            
-            do {
-                let content = try context.fetch(SearchResultEntity.fetchRequest()) as! [SearchResultEntity]
-                
-                ///fetch all data, need filtering
-                for item in content {
-                    if item.keyword == keyword && item.page == "\(page)" {
-                        ///data found -> convert to BookSearchModel
-                        //                        item.books as BookModelEntity
-                        var books = [BookModel]()
-                        for book in item.books! {
-                            if let book = book as? BookModelEntity,
-                               let title = book.title,
-                               let subtitle = book.subtitle,
-                               let isbn13 = book.isbn13,
-                               let image = book.image,
-                               let url = book.url,
-                               let price = book.price {
-                                books.append(
-                                    BookModel(
-                                        title: title,
-                                        subtitle: subtitle,
-                                        isbn13: isbn13,
-                                        image: image,
-                                        url: url,
-                                        price: price
-                                    )
+        let context = CoreDataManager.shared.persistentContainer.viewContext
+        completion(nil)
+        do {
+            let content = try context.fetch(SearchResultEntity.fetchRequest()) as! [SearchResultEntity]
+            ///fetch all data, need filtering
+            for item in content {
+                if item.keyword == keyword && item.page == "\(page)" {
+                    ///data found -> convert to BookSearchModel
+                    //                        item.books as BookModelEntity
+                    var books = [BookModel]()
+                    for book in item.books! {
+                        if let book = book as? BookModelEntity,
+                           let title = book.title,
+                           let subtitle = book.subtitle,
+                           let isbn13 = book.isbn13,
+                           let image = book.image,
+                           let url = book.url,
+                           let price = book.price {
+                            books.append(
+                                BookModel(
+                                    title: title,
+                                    subtitle: subtitle,
+                                    isbn13: isbn13,
+                                    image: image,
+                                    url: url,
+                                    price: price
                                 )
-                            }
+                            )
                         }
-                        completion(BookSearchModel(total: item.total, page: item.page ,books: books))
                     }
+
+                    completion(BookSearchModel(total: item.total, page: item.page ,books: books))
                 }
-                /// not found return nil
-                completion(nil)
-                
-            } catch {
-                print(error.localizedDescription)
             }
+            /// not found return nil
+            completion(nil)
+
+        } catch {
+            print(error.localizedDescription)
         }
         
     }
@@ -146,8 +144,7 @@ class SearchResultManager {
     public func saveAtDisk(keyword: String, page: Int, data: BookSearchModel) {
         //TODO: saveing should be in background thread move persistentContainer outside from appDelegate
         DispatchQueue.main.async {
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            let context = appDelegate.persistentContainer.viewContext
+            let context = CoreDataManager.shared.persistentContainer.viewContext
             
             let entity = NSEntityDescription.entity(forEntityName: "SearchResultEntity", in: context)
             
@@ -183,5 +180,6 @@ class SearchResultManager {
             }
         }
     }
+    
     
 }

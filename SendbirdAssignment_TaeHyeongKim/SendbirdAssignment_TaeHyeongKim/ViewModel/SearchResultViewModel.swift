@@ -30,6 +30,7 @@ class SearchResultViewModel: ObservableObject {
         if let books = data.books {
             self.searchResultArray = books
         }
+        currentPage += 1
     }
     
     private func paginationCounter(data: BookSearchModel){
@@ -41,41 +42,12 @@ class SearchResultViewModel: ObservableObject {
     
     public func removeResult(){
         searchResultArray.removeAll()
-    }
-    
-    //MARK: API Call
-    public func searchBooks(keyword: String) {
         currentPage = 1
-        
-        SearchResultManager.shared.getSearchResultFromCache(
-            keyword: keyword,
-            page: currentPage
-        ) { [weak self] (result) in
-            // search result 가 cache(disk + memory) 에 있을 때
-            if let data = result {
-                self?.setSearchListView(data: data)
-                
-            } else {// search result 가 cache에 없을 때
-                NetworkService.shared.getSearchResult(keyword: keyword,page: self!.currentPage) { [weak self] (result) in
-                    switch result {
-                    case .success(let data):
-                        print("get from url        \(self?.currentPage ?? -1)")
-                        SearchResultManager.shared
-                            .saveAtMemory(keyword: keyword, page: self!.currentPage, data: data)
-                        SearchResultManager.shared
-                            .saveAtDisk(keyword: keyword, page: self!.currentPage, data: data)
-                        
-                        self?.setSearchListView(data: data)
-                        
-                    case .failure(let err):
-                        print(err.localizedDescription)
-                    }
-                }
-            }
-        }
     }
     
+    //MARK: API Call    
     public func fetchMorePage(keyword: String) {
+        
         DispatchQueue.global(qos: .background).async {
             SearchResultManager.shared.getSearchResultFromCache(
                 keyword: keyword,
@@ -83,19 +55,26 @@ class SearchResultViewModel: ObservableObject {
             ) { [weak self] (result) in
                 // search result 가 cache(disk + memory) 에 있을 때
                 if let data = result {
-                    self?.paginationCounter(data: data)
-                    
+                    if self?.currentPage == 1 {
+                        self?.setSearchListView(data: data)
+                    }else {
+                        self?.paginationCounter(data: data)
+                    }
                 } else {// search result 가 cache에 없을 때
                     NetworkService.shared.getSearchResult(keyword: keyword, page: self!.currentPage) { [weak self] (result) in
                         switch result {
                         case .success(let data):
-                            print("get more from url        \(self?.currentPage ?? -1)")
+                            print("get from url        \(self?.currentPage ?? -1)")
                             SearchResultManager.shared
                                 .saveAtMemory(keyword: keyword, page: self!.currentPage, data: data)
                             SearchResultManager.shared
                                 .saveAtDisk(keyword: keyword, page: self!.currentPage, data: data)
-                            self?.paginationCounter(data: data)
-                        case .failure(let err):
+                            
+                            if self?.currentPage == 1 {
+                                self?.setSearchListView(data: data)
+                            }else {
+                                self?.paginationCounter(data: data)
+                            }                        case .failure(let err):
                             print(err.localizedDescription)
                         }
                     }

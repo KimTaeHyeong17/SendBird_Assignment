@@ -30,6 +30,7 @@
 		837E9AF025E16BA000D56BC5 /* SearchResultEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837E9AEC25E16BA000D56BC5 /* SearchResultEntity+CoreDataProperties.swift */; };
 		837E9AF125E16BA000D56BC5 /* BookModelEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837E9AED25E16BA000D56BC5 /* BookModelEntity+CoreDataClass.swift */; };
 		837E9AF225E16BA000D56BC5 /* BookModelEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837E9AEE25E16BA000D56BC5 /* BookModelEntity+CoreDataProperties.swift */; };
+		83F7642225E2441600629365 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F7642125E2441600629365 /* CoreDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		837E9AEC25E16BA000D56BC5 /* SearchResultEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchResultEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		837E9AED25E16BA000D56BC5 /* BookModelEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookModelEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		837E9AEE25E16BA000D56BC5 /* BookModelEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookModelEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		83F7642125E2441600629365 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +180,7 @@
 				837E9AEC25E16BA000D56BC5 /* SearchResultEntity+CoreDataProperties.swift */,
 				837E9AED25E16BA000D56BC5 /* BookModelEntity+CoreDataClass.swift */,
 				837E9AEE25E16BA000D56BC5 /* BookModelEntity+CoreDataProperties.swift */,
+				83F7642125E2441600629365 /* CoreDataManager.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -271,6 +274,7 @@
 				837E9A3325DA794400D56BC5 /* BookDetailModel.swift in Sources */,
 				837E99F525DA4C0600D56BC5 /* DetailBookViewController.swift in Sources */,
 				837E9A8A25E138C900D56BC5 /* DiskCache.xcdatamodeld in Sources */,
+				83F7642225E2441600629365 /* CoreDataManager.swift in Sources */,
 				837E99B225DA4A6A00D56BC5 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

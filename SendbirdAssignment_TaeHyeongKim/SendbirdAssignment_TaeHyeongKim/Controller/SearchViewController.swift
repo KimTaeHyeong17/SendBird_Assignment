@@ -74,7 +74,6 @@ class SearchViewController: UIViewController {
     
 }
 extension SearchViewController: UITableViewDataSourcePrefetching {
-    
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         for indexPath in indexPaths {
             if viewModel.currentPage < viewModel.maxPage {
@@ -167,7 +166,7 @@ extension SearchViewController: UISearchBarDelegate {
             searchBar.prompt = nil
             return
         }
-        viewModel.searchBooks(keyword: searchBar.text!)
+        viewModel.fetchMorePage(keyword: searchBar.text!)
     }
 }
 extension SearchViewController: OpenSafariViewControllerDelegate {

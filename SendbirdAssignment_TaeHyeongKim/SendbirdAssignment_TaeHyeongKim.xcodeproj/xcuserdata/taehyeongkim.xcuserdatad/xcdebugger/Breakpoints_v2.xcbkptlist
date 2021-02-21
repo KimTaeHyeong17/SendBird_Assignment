@@ -3,4 +3,102 @@
    uuid = "29B507A3-AE4D-4A30-A4D0-356766C6A585"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "01A35631-23E7-4139-8F04-E0C5EC87BBF7"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SendbirdAssignment_TaeHyeongKim/Utils/SearchCacheManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "getSearchResultFromCache(keyword:page:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F766B2DD-78E6-4FE9-956C-A2B9E36FD099"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SendbirdAssignment_TaeHyeongKim/Utils/SearchCacheManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "getSearchResultFromCache(keyword:page:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E5D3FDFC-F957-4A13-B6E0-381B24F41F56"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SendbirdAssignment_TaeHyeongKim/Utils/SearchCacheManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "getSearchResultFromCache(keyword:page:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "582C35E7-AC97-4033-A45F-46AEBA65789E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SendbirdAssignment_TaeHyeongKim/ViewModel/SearchResultViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "fetchMorePage(keyword:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "582C35E7-AC97-4033-A45F-46AEBA65789E - ba2394d34884c0f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SendbirdAssignment_TaeHyeongKim.SearchResultViewModel.fetchMorePage(keyword: Swift.String) -&gt; ()"
+                  moduleName = "SendbirdAssignment_TaeHyeongKim"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/taehyeongkim/Documents/GitHub/SendBird_Assignment/SendbirdAssignment_TaeHyeongKim/SendbirdAssignment_TaeHyeongKim/ViewModel/SearchResultViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "83"
+                  endingLineNumber = "83"
+                  offsetFromSymbolStart = "344">
+               </Location>
+               <Location
+                  uuid = "582C35E7-AC97-4033-A45F-46AEBA65789E - b6a7924dd124443"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in SendbirdAssignment_TaeHyeongKim.SearchResultViewModel.fetchMorePage(keyword: Swift.String) -&gt; ()"
+                  moduleName = "SendbirdAssignment_TaeHyeongKim"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/taehyeongkim/Documents/GitHub/SendBird_Assignment/SendbirdAssignment_TaeHyeongKim/SendbirdAssignment_TaeHyeongKim/ViewModel/SearchResultViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "84"
+                  endingLineNumber = "84"
+                  offsetFromSymbolStart = "76">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
