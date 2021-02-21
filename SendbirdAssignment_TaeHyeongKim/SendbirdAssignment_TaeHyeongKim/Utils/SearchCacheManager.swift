@@ -60,17 +60,17 @@ class SearchResultManager {
                 ///get from disk cache
                 ///save to memory cache
                 completion(nil)
-//                self.getSearchResultFromDisk(keyword: keyword, page: page) { (data) in
-//                    if let data = data {
-//                        print("get from disk       \(page)")
-//                        completion(data)
-//                        self.saveAtMemory(keyword: keyword, page: page, data: data)
-//                        return
-//                    }else {
-//                        //TODO: get from url and save to disk and memory is done in viewModel
-//                        completion(nil)
-//                    }
-//                }
+                self.getSearchResultFromDisk(keyword: keyword, page: page) { (data) in
+                    if let data = data {
+                        print("get from disk       \(page)")
+                        completion(data)
+                        self.saveAtMemory(keyword: keyword, page: page, data: data)
+                        return
+                    }else {
+                        //TODO: get from url and save to disk and memory is done in viewModel
+                        completion(nil)
+                    }
+                }
             }
         }
     }
@@ -94,6 +94,7 @@ class SearchResultManager {
             ///fetch all data, need filtering
             for item in content {
                 if item.keyword == keyword && item.page == "\(page)" {
+                    print("data found in disk \(keyword) \(page)")
                     ///data found -> convert to BookSearchModel
                     //                        item.books as BookModelEntity
                     var books = [BookModel]()
@@ -117,13 +118,14 @@ class SearchResultManager {
                             )
                         }
                     }
-
+                    
                     completion(BookSearchModel(total: item.total, page: item.page ,books: books))
+                    return
                 }
             }
             /// not found return nil
             completion(nil)
-
+            
         } catch {
             print(error.localizedDescription)
         }
@@ -143,12 +145,12 @@ class SearchResultManager {
     
     public func saveAtDisk(keyword: String, page: Int, data: BookSearchModel) {
         //TODO: saveing should be in background thread move persistentContainer outside from appDelegate
-        DispatchQueue.main.async {
-            let context = CoreDataManager.shared.persistentContainer.viewContext
-            
-            let entity = NSEntityDescription.entity(forEntityName: "SearchResultEntity", in: context)
-            
-            if entity != nil {
+        let context = CoreDataManager.shared.persistentContainer.viewContext
+        
+        let entity = NSEntityDescription.entity(forEntityName: "SearchResultEntity", in: context)
+        
+        if entity != nil {
+            context.perform {
                 //                let searchResult = NSManagedObject(entity: entity, insertInto: context) as! SearchResultEntity
                 let searchResult = SearchResultEntity(context: context)
                 searchResult.total = data.total
@@ -170,7 +172,6 @@ class SearchResultManager {
                 
                 do {
                     try context.save()
-                    
                     print("save to disk        \(page)")
                     
                 } catch {
@@ -179,6 +180,7 @@ class SearchResultManager {
                 
             }
         }
+        
     }
     
     

@@ -32,7 +32,7 @@ class DetailBookViewController: UIViewController {
     @IBOutlet weak var ratingStar3: UIImageView!
     @IBOutlet weak var ratingStar4: UIImageView!
     
-    var bookData: BookDetailModel?
+    public var bookData: BookDetailModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()

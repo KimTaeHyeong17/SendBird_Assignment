@@ -77,13 +77,13 @@ extension SearchViewController: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         for indexPath in indexPaths {
             if viewModel.currentPage < viewModel.maxPage {
-                if viewModel.searchResultArray.count-1 == indexPath.row {
+                if (viewModel.currentPage-1)*10-1 <= indexPath.row { ///한페이지당 10개, 호출시점의 페이지는 현재페이지+=1 된 시점, index 0 부터 시작하니 -1, 요청한 row 인덱스가 계산값보다 같거나 클때 fetchMore
                     viewModel.fetchMorePage(keyword: searchBar.text!)
                 }
             }
         }
     }
-    
+
 }
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
