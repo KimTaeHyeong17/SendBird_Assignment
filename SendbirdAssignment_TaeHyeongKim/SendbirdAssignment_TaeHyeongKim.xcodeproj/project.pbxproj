@@ -15,7 +15,6 @@
 		837E99BC25DA4A7600D56BC5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 837E99BA25DA4A7600D56BC5 /* LaunchScreen.storyboard */; };
 		837E99F525DA4C0600D56BC5 /* DetailBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837E99F425DA4C0600D56BC5 /* DetailBookViewController.swift */; };
 		837E9A0025DA514B00D56BC5 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837E99FF25DA514B00D56BC5 /* Extensions.swift */; };
-		837E9A0425DA520C00D56BC5 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837E9A0325DA520C00D56BC5 /* Network.swift */; };
 		837E9A0725DA57B600D56BC5 /* BookSearchedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837E9A0625DA57B600D56BC5 /* BookSearchedModel.swift */; };
 		837E9A2625DA60D300D56BC5 /* BookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837E9A2425DA60D300D56BC5 /* BookTableViewCell.swift */; };
 		837E9A2725DA60D300D56BC5 /* BookTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 837E9A2525DA60D300D56BC5 /* BookTableViewCell.xib */; };
@@ -31,6 +30,14 @@
 		837E9AF125E16BA000D56BC5 /* BookModelEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837E9AED25E16BA000D56BC5 /* BookModelEntity+CoreDataClass.swift */; };
 		837E9AF225E16BA000D56BC5 /* BookModelEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837E9AEE25E16BA000D56BC5 /* BookModelEntity+CoreDataProperties.swift */; };
 		83F7642225E2441600629365 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F7642125E2441600629365 /* CoreDataManager.swift */; };
+		83F7642625E29E0A00629365 /* HTTPNetworkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F7642525E29E0A00629365 /* HTTPNetworkRoute.swift */; };
+		83F7642E25E29E5A00629365 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F7642D25E29E5A00629365 /* HTTPMethod.swift */; };
+		83F7643125E29E7800629365 /* HTTPNetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F7643025E29E7800629365 /* HTTPNetworkError.swift */; };
+		83F7643425E29EAA00629365 /* HTTPNetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F7643325E29EAA00629365 /* HTTPNetworkRequest.swift */; };
+		83F7643725E29EDB00629365 /* HTTPNetworkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F7643625E29EDB00629365 /* HTTPNetworkResponse.swift */; };
+		83F7643A25E29EFB00629365 /* URLEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F7643925E29EFB00629365 /* URLEncoder.swift */; };
+		83F7643D25E29F3000629365 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F7643C25E29F3000629365 /* Result.swift */; };
+		83F7644125E29F7100629365 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F7644025E29F7100629365 /* NetworkService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,7 +51,6 @@
 		837E99BD25DA4A7600D56BC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		837E99F425DA4C0600D56BC5 /* DetailBookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailBookViewController.swift; sourceTree = "<group>"; };
 		837E99FF25DA514B00D56BC5 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		837E9A0325DA520C00D56BC5 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		837E9A0625DA57B600D56BC5 /* BookSearchedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSearchedModel.swift; sourceTree = "<group>"; };
 		837E9A2425DA60D300D56BC5 /* BookTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTableViewCell.swift; sourceTree = "<group>"; };
 		837E9A2525DA60D300D56BC5 /* BookTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookTableViewCell.xib; sourceTree = "<group>"; };
@@ -60,6 +66,14 @@
 		837E9AED25E16BA000D56BC5 /* BookModelEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookModelEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		837E9AEE25E16BA000D56BC5 /* BookModelEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookModelEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		83F7642125E2441600629365 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		83F7642525E29E0A00629365 /* HTTPNetworkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPNetworkRoute.swift; sourceTree = "<group>"; };
+		83F7642D25E29E5A00629365 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		83F7643025E29E7800629365 /* HTTPNetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPNetworkError.swift; sourceTree = "<group>"; };
+		83F7643325E29EAA00629365 /* HTTPNetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPNetworkRequest.swift; sourceTree = "<group>"; };
+		83F7643625E29EDB00629365 /* HTTPNetworkResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPNetworkResponse.swift; sourceTree = "<group>"; };
+		83F7643925E29EFB00629365 /* URLEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLEncoder.swift; sourceTree = "<group>"; };
+		83F7643C25E29F3000629365 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		83F7644025E29F7100629365 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +113,7 @@
 				837E9A4E25DE574700D56BC5 /* ViewModel */,
 				837E99FE25DA514300D56BC5 /* Utils */,
 				837E9A3125DA792E00D56BC5 /* Model */,
+				83F7642425E29DE800629365 /* Network */,
 				837E9A5125E0CB9A00D56BC5 /* CoreData */,
 				837E99F725DA4C0F00D56BC5 /* Delegate */,
 				837E99B825DA4A7600D56BC5 /* Assets.xcassets */,
@@ -137,7 +152,6 @@
 			isa = PBXGroup;
 			children = (
 				837E99FF25DA514B00D56BC5 /* Extensions.swift */,
-				837E9A0325DA520C00D56BC5 /* Network.swift */,
 				837E9A2D25DA6B9300D56BC5 /* ImageCacheManager.swift */,
 				837E9A3625DD0C7000D56BC5 /* SearchCacheManager.swift */,
 				837E9A4025DD472C00D56BC5 /* Protocols.swift */,
@@ -183,6 +197,45 @@
 				83F7642125E2441600629365 /* CoreDataManager.swift */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		83F7642425E29DE800629365 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				83F7642B25E29E2100629365 /* Service */,
+				83F7642A25E29E1A00629365 /* Encoding */,
+				83F7642925E29E1000629365 /* HTTP */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		83F7642925E29E1000629365 /* HTTP */ = {
+			isa = PBXGroup;
+			children = (
+				83F7642525E29E0A00629365 /* HTTPNetworkRoute.swift */,
+				83F7642D25E29E5A00629365 /* HTTPMethod.swift */,
+				83F7643025E29E7800629365 /* HTTPNetworkError.swift */,
+				83F7643325E29EAA00629365 /* HTTPNetworkRequest.swift */,
+				83F7643625E29EDB00629365 /* HTTPNetworkResponse.swift */,
+			);
+			path = HTTP;
+			sourceTree = "<group>";
+		};
+		83F7642A25E29E1A00629365 /* Encoding */ = {
+			isa = PBXGroup;
+			children = (
+				83F7643C25E29F3000629365 /* Result.swift */,
+				83F7643925E29EFB00629365 /* URLEncoder.swift */,
+			);
+			path = Encoding;
+			sourceTree = "<group>";
+		};
+		83F7642B25E29E2100629365 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				83F7644025E29F7100629365 /* NetworkService.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -256,25 +309,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83F7643D25E29F3000629365 /* Result.swift in Sources */,
 				837E9AF025E16BA000D56BC5 /* SearchResultEntity+CoreDataProperties.swift in Sources */,
 				837E9A8425E0D00100D56BC5 /* BookModel.swift in Sources */,
+				83F7643125E29E7800629365 /* HTTPNetworkError.swift in Sources */,
 				837E9A2625DA60D300D56BC5 /* BookTableViewCell.swift in Sources */,
 				837E9A0025DA514B00D56BC5 /* Extensions.swift in Sources */,
+				83F7644125E29F7100629365 /* NetworkService.swift in Sources */,
 				837E9A2E25DA6B9300D56BC5 /* ImageCacheManager.swift in Sources */,
 				837E9A4125DD472C00D56BC5 /* Protocols.swift in Sources */,
 				837E99B425DA4A6A00D56BC5 /* SearchViewController.swift in Sources */,
 				837E9A3725DD0C7000D56BC5 /* SearchCacheManager.swift in Sources */,
+				83F7643725E29EDB00629365 /* HTTPNetworkResponse.swift in Sources */,
 				837E9AEF25E16BA000D56BC5 /* SearchResultEntity+CoreDataClass.swift in Sources */,
 				837E9AF125E16BA000D56BC5 /* BookModelEntity+CoreDataClass.swift in Sources */,
 				837E9A0725DA57B600D56BC5 /* BookSearchedModel.swift in Sources */,
-				837E9A0425DA520C00D56BC5 /* Network.swift in Sources */,
 				837E9AF225E16BA000D56BC5 /* BookModelEntity+CoreDataProperties.swift in Sources */,
 				837E9A4C25DE4AAF00D56BC5 /* SearchResultViewModel.swift in Sources */,
+				83F7642E25E29E5A00629365 /* HTTPMethod.swift in Sources */,
 				837E99B025DA4A6A00D56BC5 /* AppDelegate.swift in Sources */,
 				837E9A3325DA794400D56BC5 /* BookDetailModel.swift in Sources */,
+				83F7642625E29E0A00629365 /* HTTPNetworkRoute.swift in Sources */,
+				83F7643A25E29EFB00629365 /* URLEncoder.swift in Sources */,
 				837E99F525DA4C0600D56BC5 /* DetailBookViewController.swift in Sources */,
 				837E9A8A25E138C900D56BC5 /* DiskCache.xcdatamodeld in Sources */,
 				83F7642225E2441600629365 /* CoreDataManager.swift in Sources */,
+				83F7643425E29EAA00629365 /* HTTPNetworkRequest.swift in Sources */,
 				837E99B225DA4A6A00D56BC5 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
