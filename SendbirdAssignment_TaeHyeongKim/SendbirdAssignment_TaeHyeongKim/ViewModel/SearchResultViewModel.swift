@@ -38,6 +38,8 @@ class SearchResultViewModel: ObservableObject {
             print("page \(page)")
             searchResultArray.append(contentsOf: books)
             currentPage += 1
+            print("\npaginationCounter \(data.page)")
+
         }
     }
     
@@ -69,10 +71,12 @@ class SearchResultViewModel: ObservableObject {
                     switch result {
                     case .success(let data):
                         print("get from url        \(self?.currentPage ?? -1)")
-                        SearchResultManager.shared
-                            .saveAtMemory(keyword: keyword, page: self!.currentPage, data: data)
-                        SearchResultManager.shared
-                            .saveAtDisk(keyword: keyword, page: self!.currentPage, data: data)
+                        if data.total != "0" { ///if search result exist then save at cache
+                            SearchResultManager.shared
+                                .saveAtMemory(keyword: keyword, page: self!.currentPage, data: data)
+                            SearchResultManager.shared
+                                .saveAtDisk(keyword: keyword, page: self!.currentPage, data: data)
+                        }
                         
                         if self?.currentPage == 1 {
                             self?.setSearchListView(data: data)

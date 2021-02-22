@@ -96,7 +96,6 @@ class SearchResultManager {
                 if item.keyword == keyword && item.page == "\(page)" {
                     print("data found in disk \(keyword) \(page)")
                     ///data found -> convert to BookSearchModel
-                    //                        item.books as BookModelEntity
                     var books = [BookModel]()
                     for book in item.books! {
                         if let book = book as? BookModelEntity,

@@ -127,7 +127,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let isbn13 = viewModel.searchResultArray[indexPath.row].isbn13{
+        if let isbn13 = viewModel.searchResultArray[indexPath.row].isbn13 {
             viewModel.fetchBookDetail(isbn13: isbn13) { [weak self] (data) in
                 DispatchQueue.main.async {
                     if let vc = self?.storyboard?.instantiateViewController(withIdentifier: "DetailBookViewController") as? DetailBookViewController {
@@ -149,7 +149,7 @@ extension SearchViewController: UISearchBarDelegate {
             selector: #selector(self.reload(_:)),
             object: searchBar
         )
-        perform(#selector(self.reload(_:)), with: searchBar, afterDelay: 0.5)
+        perform(#selector(self.reload(_:)), with: searchBar, afterDelay: 0.3)
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
