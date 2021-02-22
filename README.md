@@ -1,4 +1,4 @@
-# SendBird_Assignment
+# SendBird_Assignment - master branch
 샌드버드 과제
 
 - 오픈소스 사용금지
@@ -66,8 +66,8 @@
 
 
 #### 2/22 월
-- [ ] 코드정리
-- [ ] 제출
+- [x] 코드정리
+- [x] 제출
 
 
 
@@ -87,6 +87,9 @@ B도 그럼 추가한다 (중복생김)
 그게 아니라 1페이지에서 스크롤 안했는데 초기 search 1페이지랑 fetchMore 1페이지가 겹친거였음
 ```
 - [x] 검색어에 띄워쓰기 있으면 url 생성에서 에러난다.(percentEncoding)
+- [ ] 가끔 같은 page duplication이 생긴다. 
+    - searchbar 에서 입력이 있을경우 0.3 딜레이를 주면서 keyword를 모은 후 api request를 던지는데 입력 속도에 따라 리쿼스트가 많아져서 이전 요청 응답이 중복 쌓이는 건가? (request cancel 구현?)
+    - disk, memory, url 에서 받아오는 데이터 사이 타이밍 문제? (completion handler 말고 combine?)
 
 
 
