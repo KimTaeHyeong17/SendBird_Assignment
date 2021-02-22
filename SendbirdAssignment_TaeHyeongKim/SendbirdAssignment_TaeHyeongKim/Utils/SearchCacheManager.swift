@@ -52,21 +52,20 @@ class SearchResultManager {
         //get from memory cache
         getSearchResultFromMemory(keyword: keyword, page: page) { (data) in
             if let data = data {
-//                print("get from memory     \(page)")
+                print("get from memory     \(page)")
                 completion(data)
                 return
             }else {
                 ///get from disk cache
                 ///save to memory cache
-                completion(nil)
                 self.getSearchResultFromDisk(keyword: keyword, page: page) { (data) in
                     if let data = data {
-//                        print("get from disk       \(page)")
+                        print("get from disk       \(page)")
                         completion(data)
                         self.saveAtMemory(keyword: keyword, page: page, data: data)
                         return
                     }else {
-                        //TODO: get from url and save to disk and memory is done in viewModel
+                        print("get from url        \(page)")
                         completion(nil)
                     }
                 }
@@ -142,14 +141,12 @@ class SearchResultManager {
     }
     
     public func saveAtDisk(keyword: String, page: Int, data: BookSearchModel) {
-        //TODO: saveing should be in background thread move persistentContainer outside from appDelegate
         let context = CoreDataManager.shared.persistentContainer.viewContext
         
         let entity = NSEntityDescription.entity(forEntityName: "SearchResultEntity", in: context)
         
         if entity != nil {
             context.perform {
-                //                let searchResult = NSManagedObject(entity: entity, insertInto: context) as! SearchResultEntity
                 let searchResult = SearchResultEntity(context: context)
                 searchResult.total = data.total
                 searchResult.page = data.page
