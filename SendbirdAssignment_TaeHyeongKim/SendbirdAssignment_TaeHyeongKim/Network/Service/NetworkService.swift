@@ -25,8 +25,12 @@ struct NetworkService {
                     let result = HTTPNetworkResponse.handleNetworkResponse(for: response)
                     switch result {
                     case .success:
-                        let result = try? JSONDecoder().decode(BookSearchModel.self, from: unwrappedData)
-                        completion(Result.success(result!))
+                        if let result = try? JSONDecoder().decode(BookSearchModel.self, from: unwrappedData) {
+                            completion(Result.success(result))
+                        }else {
+                            print(HTTPNetworkError.decodingFailed)
+                        }
+                        
                     case .failure:
                         print(result.self)
                         completion(Result.failure(HTTPNetworkError.badRequest))
@@ -49,8 +53,11 @@ struct NetworkService {
                     let result = HTTPNetworkResponse.handleNetworkResponse(for: response)
                     switch result {
                     case .success:
-                        let result = try? JSONDecoder().decode(BookDetailModel.self, from: unwrappedData)
-                        completion(Result.success(result!))
+                        if let result = try? JSONDecoder().decode(BookDetailModel.self, from: unwrappedData) {
+                            completion(Result.success(result))
+                        }else {
+                            print(HTTPNetworkError.decodingFailed)
+                        }
                     case .failure:
                         print(result.self)
                         completion(Result.failure(HTTPNetworkError.badRequest))
