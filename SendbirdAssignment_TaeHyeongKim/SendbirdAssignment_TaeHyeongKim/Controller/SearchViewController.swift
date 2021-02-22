@@ -85,7 +85,6 @@ extension SearchViewController: UITableViewDataSourcePrefetching {
             }
         }
     }
-
 }
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
@@ -167,6 +166,7 @@ extension SearchViewController: UISearchBarDelegate {
             viewModel.removeResult()
             tableView.reloadData()
             searchBar.prompt = nil
+            noResultLabel.isHidden = true
             return
         }
         if lastSearchedKeyword != query {
@@ -174,7 +174,7 @@ extension SearchViewController: UISearchBarDelegate {
         }
         viewModel.fetchSearchResult(keyword: query)
         lastSearchedKeyword = query
-        print("searched keyword \(query)")
+//        print("searched keyword \(query)")
     }
 }
 extension SearchViewController: OpenSafariViewControllerDelegate {

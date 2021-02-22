@@ -48,12 +48,11 @@ class SearchResultManager {
     }
     
     
-    // TODO: add disk cache layer
     public func getSearchResultFromCache(keyword: String, page: Int, completion: @escaping (BookSearchModel?) -> ()) {
         //get from memory cache
         getSearchResultFromMemory(keyword: keyword, page: page) { (data) in
             if let data = data {
-                print("get from memory     \(page)")
+//                print("get from memory     \(page)")
                 completion(data)
                 return
             }else {
@@ -62,7 +61,7 @@ class SearchResultManager {
                 completion(nil)
                 self.getSearchResultFromDisk(keyword: keyword, page: page) { (data) in
                     if let data = data {
-                        print("get from disk       \(page)")
+//                        print("get from disk       \(page)")
                         completion(data)
                         self.saveAtMemory(keyword: keyword, page: page, data: data)
                         return
@@ -94,7 +93,7 @@ class SearchResultManager {
             ///fetch all data, need filtering
             for item in content {
                 if item.keyword == keyword && item.page == "\(page)" {
-                    print("data found in disk \(keyword) \(page)")
+//                    print("data found in disk \(keyword) \(page)")
                     ///data found -> convert to BookSearchModel
                     var books = [BookModel]()
                     for book in item.books! {
@@ -138,7 +137,7 @@ class SearchResultManager {
                 SearchResultCacheManager.shared.setObject(StructHolder(data: data), forKey: cacheKey)
             }
         }
-        print("save to memory      \(page)")
+        //print("save to memory      \(page)")
         
     }
     
@@ -171,7 +170,7 @@ class SearchResultManager {
                 
                 do {
                     try context.save()
-                    print("save to disk        \(page)")
+                    //print("save to disk        \(page)")
                     
                 } catch {
                     print("coredata savedisk error \n \(error.localizedDescription)")
