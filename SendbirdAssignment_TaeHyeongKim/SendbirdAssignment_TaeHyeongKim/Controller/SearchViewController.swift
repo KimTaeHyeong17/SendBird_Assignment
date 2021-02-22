@@ -128,12 +128,14 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let isbn13 = viewModel.searchResultArray[indexPath.row].isbn13 {
+            tableView.cellForRow(at: indexPath)?.isUserInteractionEnabled = false
             viewModel.fetchBookDetail(isbn13: isbn13) { [weak self] (data) in
                 DispatchQueue.main.async {
                     if let vc = self?.storyboard?.instantiateViewController(withIdentifier: "DetailBookViewController") as? DetailBookViewController {
                         vc.title = "📓 Book Detail"
                         vc.bookData = data
                         self?.navigationController?.pushViewController(vc, animated: true)
+                        tableView.cellForRow(at: indexPath)?.isUserInteractionEnabled = true
                     }
                 }
             }
