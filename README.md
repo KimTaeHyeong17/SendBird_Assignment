@@ -89,3 +89,405 @@
 - [ ] 캐싱 데이터 바뀌었을 경우 E-Tag등 활용해 update 해야함
 - [ ] core data 에서 fetching 할때 keyword와 page 찾는 로직
 - [ ] 화면에 표시되고 있는 이미지 부터 로딩
+
+
+### 제출 이후 trouble shooting
+1. duplication 문제의 원인이 무엇인가 (기능 disable 해서 원인파악)
+    - disk cache + memory cache + fetch from url (중복 발생)
+    - memory cache + fetch from url (중복 발생X)
+    - fetch from url (중복 발생X)
+
+2. disk cache 에서 문제가 발생하면 어느 step 에서 문제가 발생할까
+    - saving to disk step
+```
+    Java fetch request page 1
+     Java fetch request page 1
+2021-02-28 20:17:51.772085+0900 SendbirdAssignment_TaeHyeongKim[29244:458183] [] nw_protocol_get_quic_image_block_invoke dlopen libquic failed
+Sams Teach Yourself Java in 24 Hours, 8th Edition
+Java Cookbook, 2nd Edition
+Expert Oracle and Java Security
+JavaScript: The Good Parts
+Pro Java ME Apps
+Sams Teach Yourself Java in 24 Hours, 6th Edition
+Effective JavaScript
+JavaScript Creativity
+Learning JavaScript
+Head First JavaScript
+     Java fetch request page 3
+     Java fetch request page 3
+Java Cookbook, 2nd Edition
+Sams Teach Yourself Java in 24 Hours, 8th Edition
+Effective JavaScript
+Sams Teach Yourself Java in 24 Hours, 6th Edition
+Pro Java ME Apps
+Head First JavaScript
+Learning JavaScript
+JavaScript Creativity
+JavaScript: The Good Parts
+Expert Oracle and Java Security
+JavaScript: The Good Parts
+Java Design Patterns
+Head First JavaScript
+JavaScript Creativity
+Exploring Java 9
+Practical JSF in Java EE 8
+The Definitive Guide to JSF in Java EE 8
+Java 7 Pocket Guide, 2nd Edition
+Java Cookbook, 2nd Edition
+Pro Java ME Apps
+Learning JavaScript
+Sams Teach Yourself Java in 24 Hours, 8th Edition
+Learn JavaFX 8
+Expert Oracle and Java Security
+Sams Teach Yourself Java in 24 Hours, 6th Edition
+Scripting in Java
+Pro JavaFX 9
+JavaScript Testing with Jasmine
+Effective JavaScript
+JavaMail API
+     Java fetch request page 5
+     Java fetch request page 5
+Learn JavaFX 8
+Expert Oracle and Java Security
+Learning JavaScript
+Effective JavaScript
+Java 7 Pocket Guide, 2nd Edition
+JavaScript Testing with Jasmine
+Pro Java ME Apps
+The Definitive Guide to JSF in Java EE 8
+JavaScript Creativity
+Scripting in Java
+Head First JavaScript
+Java Cookbook, 2nd Edition
+Sams Teach Yourself Java in 24 Hours, 8th Edition
+Exploring Java 9
+Practical JSF in Java EE 8
+JavaScript: The Good Parts
+JavaMail API
+Pro JavaFX 9
+Java Design Patterns
+Sams Teach Yourself Java in 24 Hours, 6th Edition
+The Well-Grounded Java Developer
+Pro JavaFX 9
+Java 7 Pocket Guide, 2nd Edition
+JavaScript Creativity
+Java Design Patterns
+The Definitive Guide to JSF in Java EE 8
+Simplifying JavaScript
+Java by Comparison
+Learning JavaScript
+Functional Programming in Java
+Java Cookbook, 2nd Edition
+Head First JavaScript
+Java Cookbook, 4th Edition
+Modern Java Recipes
+Effective JavaScript
+Sams Teach Yourself Java in 24 Hours, 8th Edition
+Java Performance, 2nd Edition
+JavaScript Testing with Jasmine
+Sams Teach Yourself Java in 24 Hours, 6th Edition
+JavaMail API
+Learning Java, 5th Edition
+Practical Modern JavaScript
+Expert Oracle and Java Security
+Pro Java ME Apps
+Java Pocket Guide, 4th Edition
+Exploring Java 9
+Learn JavaFX 8
+JavaScript: The Good Parts
+Scripting in Java
+Practical JSF in Java EE 8
+     Java fetch request page 7
+     Java fetch request page 7
+Learn JavaFX 8
+Modern Java Recipes
+Simplifying JavaScript
+Sams Teach Yourself Java in 24 Hours, 6th Edition
+The Definitive Guide to JSF in Java EE 8
+Effective JavaScript
+Java Cookbook, 2nd Edition
+JavaMail API
+Practical Modern JavaScript
+JavaScript Creativity
+Learning JavaScript
+Java Performance, 2nd Edition
+The Well-Grounded Java Developer
+Functional Programming in Java
+JavaScript: The Good Parts
+Java Cookbook, 4th Edition
+Java Pocket Guide, 4th Edition
+Scripting in Java
+Pro Java ME Apps
+Pro JavaFX 9
+Learning Java, 5th Edition
+Expert Oracle and Java Security
+Java 7 Pocket Guide, 2nd Edition
+Exploring Java 9
+Head First JavaScript
+Practical JSF in Java EE 8
+Sams Teach Yourself Java in 24 Hours, 8th Edition
+JavaScript Testing with Jasmine
+Java by Comparison
+Java Design Patterns
+Java Cookbook, 2nd Edition
+Practical JSF in Java EE 8
+JavaScript Creativity
+Sams Teach Yourself Java in 24 Hours, 6th Edition
+Pro JavaFX 9
+Learning Behavior-driven Development with JavaScript
+Scripting in Java
+Java Cookbook, 4th Edition
+JavaScript Security
+Simplifying JavaScript
+Modern Java Recipes
+The Definitive Guide to JSF in Java EE 8
+Head First JavaScript
+Exploring Java 9
+Pro Java ME Apps
+Mastering JavaScript High Performance
+Effective JavaScript
+Java 7 Pocket Guide, 2nd Edition
+Learning Java, 5th Edition
+JavaMail API
+Sams Teach Yourself Java in 24 Hours, 8th Edition
+Mastering JavaScript Design Patterns
+Learn JavaFX 8
+Java Design Patterns
+Functional Programming in Java
+Natural Language Processing with Java
+The Well-Grounded Java Developer
+JavaScript: The Good Parts
+Java Pocket Guide, 4th Edition
+Java Performance, 2nd Edition
+Learning JavaScript
+Test-Driven Java Development
+Java by Comparison
+Practical Modern JavaScript
+Mastering JavaScript
+Functional Programming in JavaScript
+Expert Oracle and Java Security
+JavaScript Testing with Jasmine
+Learning Java by Building Android Games
+MongoDB for Java Developers
+
+```
+ - loading from disk step
+
+```
+     Book fetch request page 1
+get from disk       1
+2021-02-28 20:19:51.400106+0900 SendbirdAssignment_TaeHyeongKim[29383:460637] [] nw_protocol_get_quic_image_block_invoke dlopen libquic failed
+     Book fetch request page 2
+     Book fetch request page 2
+The Social Media Marketing Book
+Linux All-In-One For Dummies, 6th Edition
+EPUB 3 Best Practices
+PHP & MySQL: The Missing Manual, 2nd Edition
+The Little Book on CoffeeScript
+Canon EOS Rebel T7/2000D For Dummies
+HTML5: The Missing Manual
+Google+: The Missing Manual
+Adobe Edge Animate Preview 7: The Missing Manual
+Adobe Edge Preview 5: The Missing Manual
+     Book fetch request page 4
+     Book fetch request page 4
+The Little Book on CoffeeScript
+Adobe Edge Animate Preview 7: The Missing Manual
+Linux All-In-One For Dummies, 6th Edition
+Adobe Edge Preview 5: The Missing Manual
+Canon EOS Rebel T7/2000D For Dummies
+HTML5: The Missing Manual
+The Social Media Marketing Book
+PHP & MySQL: The Missing Manual, 2nd Edition
+Google+: The Missing Manual
+EPUB 3 Best Practices
+PHP & MySQL: The Missing Manual, 2nd Edition
+HTML5: The Missing Manual
+The Book of CSS3
+EPUB 3 Best Practices
+Adobe Edge Animate Preview 7: The Missing Manual
+The Book of F#
+The Social Media Marketing Book
+The Book of Xen
+Adobe Edge Preview 5: The Missing Manual
+The Book of Ruby
+The LEGO MINDSTORMS EV3 Idea Book
+The Book of PF, 3rd Edition
+Linux All-In-One For Dummies, 6th Edition
+The Little Book on CoffeeScript
+The Book of CSS3, 2nd Edition
+The Book of Qt 4
+The Book of IMAP
+Canon EOS Rebel T7/2000D For Dummies
+The Book of PF, 2nd Edition
+Google+: The Missing Manual
+     Book fetch request page 6
+     Book fetch request page 6
+EPUB 3 Best Practices
+HTML5: The Missing Manual
+The Book of PF, 3rd Edition
+The Book of PF, 2nd Edition
+The Book of Qt 4
+Linux All-In-One For Dummies, 6th Edition
+The Book of Ruby
+The Book of F#
+Adobe Edge Preview 5: The Missing Manual
+The Book of Xen
+The Little Book on CoffeeScript
+Canon EOS Rebel T7/2000D For Dummies
+The Book of IMAP
+The Social Media Marketing Book
+Google+: The Missing Manual
+The Book of CSS3
+PHP & MySQL: The Missing Manual, 2nd Edition
+The Book of CSS3, 2nd Edition
+The LEGO MINDSTORMS EV3 Idea Book
+Adobe Edge Animate Preview 7: The Missing Manual
+Linux All-In-One For Dummies, 6th Edition
+Fundamentals of Python Programming
+Mastering Swift 2
+Learning Objective-C by Developing iPhone Games
+The LEGO MINDSTORMS EV3 Idea Book
+LaTeX: Beginner's Guide
+The Book of IMAP
+The Social Media Marketing Book
+WCF 4.0 Multi-tier Services Development with LINQ to Entities
+The Book of PF, 3rd Edition
+The Book of CSS3, 2nd Edition
+The Cucumber for Java Book
+Do more with SOA Integration: Best of Packt
+The Book of Ruby
+Adobe Edge Preview 5: The Missing Manual
+The Book of PF, 2nd Edition
+The RSpec Book
+The Book of Xen
+The Little Book on CoffeeScript
+EPUB 3 Best Practices
+PHP & MySQL: The Missing Manual, 2nd Edition
+Adobe Edge Animate Preview 7: The Missing Manual
+Fundamentals of C++ Programming
+The Book of Qt 4
+The Book of CSS3
+The dRuby Book
+The Book of F#
+HTML5: The Missing Manual
+Canon EOS Rebel T7/2000D For Dummies
+Google+: The Missing Manual
+     Book fetch request page 8
+     Book fetch request page 8
+Google+: The Missing Manual
+Learning Objective-C by Developing iPhone Games
+Fundamentals of C++ Programming
+The Book of CSS3
+The Book of Qt 4
+The dRuby Book
+Canon EOS Rebel T7/2000D For Dummies
+EPUB 3 Best Practices
+Mastering Swift 2
+Fundamentals of Python Programming
+The Book of Xen
+The Book of IMAP
+LaTeX: Beginner's Guide
+Adobe Edge Preview 5: The Missing Manual
+The Book of F#
+The Social Media Marketing Book
+The Book of PF, 3rd Edition
+The Book of PF, 2nd Edition
+The Book of CSS3, 2nd Edition
+The Little Book on CoffeeScript
+WCF 4.0 Multi-tier Services Development with LINQ to Entities
+The LEGO MINDSTORMS EV3 Idea Book
+Adobe Edge Animate Preview 7: The Missing Manual
+HTML5: The Missing Manual
+Linux All-In-One For Dummies, 6th Edition
+The Cucumber for Java Book
+Do more with SOA Integration: Best of Packt
+The Book of Ruby
+The RSpec Book
+PHP & MySQL: The Missing Manual, 2nd Edition
+Python re(gex)?
+Full Speed Python
+The dRuby Book
+3D Game Development with LWJGL 3
+Fundamentals of Python Programming
+Canon EOS Rebel T7/2000D For Dummies
+Statistics with Julia
+Google+: The Missing Manual
+The Book of CSS3, 2nd Edition
+Learning Objective-C by Developing iPhone Games
+LaTeX: Beginner's Guide
+EPUB 3 Best Practices
+The Book of Ruby
+The Book of PF, 3rd Edition
+The Book of F#
+PHP & MySQL: The Missing Manual, 2nd Edition
+The RSpec Book
+The Book of PF, 2nd Edition
+The Little Book on CoffeeScript
+The Book of CSS3
+Do more with SOA Integration: Best of Packt
+The Cucumber for Java Book
+The LEGO MINDSTORMS EV3 Idea Book
+The Book of IMAP
+The Social Media Marketing Book
+The Book of Qt 4
+The Little MongoDB Book
+Professor Frisby's Mostly Adequate Guide to Functional Programming
+The Book of Xen
+Fundamentals of C++ Programming
+The Basics of User Experience Design
+Adobe Edge Animate Preview 7: The Missing Manual
+Linux All-In-One For Dummies, 6th Edition
+WCF 4.0 Multi-tier Services Development with LINQ to Entities
+Mastering Swift 2
+A Byte of Python
+Adobe Edge Preview 5: The Missing Manual
+Reintroducing React
+HTML5: The Missing Manual
+Webapps in Go
+
+```
+
+- 일단 처음 디스크 캐시에 저장할때 두번 fetch request 호출하는 게 보이고
+- 디스크 캐시에서 불러올 때 분명 page2가 디스크에 있어야 하는데 fetch request를 보내는 걸로 보아 저장과정이 잘 안된 것 같다.
+
+캐시에서 확인하고 없으면 api 호출하는 코드를 보면
+
+```swift
+    public func getSearchResultFromCache(keyword: String, page: Int, completion: @escaping (BookSearchModel?) -> ()) {
+        //get from memory cache
+        getSearchResultFromMemory(keyword: keyword, page: page) { (data) in
+            if let data = data {
+                print("get from memory     \(page)")
+                completion(data)
+            } else {
+                self.getSearchResultFromDisk(keyword: keyword, page: page) { (data) in
+                    if let data = data {
+                        print("get from disk       \(page)")
+                        completion(data)
+                        self.saveAtMemory(keyword: keyword, page: page, data: data)
+                    }else {
+                        print("call api")
+                    }
+                }
+            }
+        }
+    }
+```
+로그를 찍어보면 
+call api
+get from disk       1
+save to memory      1
+call api
+get from disk       2
+save to memory      2
+
+completion 되기 전에 좌좌좍 else 로 빠져서 api 호출 한 다음 뒤늦게 가져오는 거시였다.
+그리고 메모리에 올라간 뒤에는 
+get from memory     1
+get from memory     2
+메모리에서 잘 받아온다.
+
+disk에서 가져올때 오버헤드가 발생해서 else 로 빠지는 듯
+
+
