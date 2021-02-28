@@ -79,7 +79,7 @@
 - [x] sometimes there are more results to load but scroll stop (change pagination method)
 - [x] (after adding core data) first page 10 element duplication in tableview (completion block was in loop and no return or break was specified, )
 - [x] 검색어에 띄워쓰기 있으면 url 생성에서 에러난다.(percentEncoding)
-- [ ] 가끔 같은 page duplication이 생긴다. (disk cache bug)
+- [x] 가끔 같은 page duplication이 생긴다. (disk cache bug) (2월28일 완료)
     - searchbar 에서 입력이 있을경우 0.3 딜레이를 주면서 keyword를 모은 후 api request를 던지는데 입력 속도에 따라 리쿼스트가 많아져서 이전 요청 응답이 중복 쌓이는 건가? (request cancel 구현?)
     - disk, memory, url 에서 받아오는 데이터 사이 타이밍 문제? (completion handler 말고 combine?)
 
@@ -87,7 +87,7 @@
 
 ### 개선해야 하는 것
 - [ ] 캐싱 데이터 바뀌었을 경우 E-Tag등 활용해 update 해야함
-- [ ] core data 에서 fetching 할때 keyword와 page 찾는 로직
+- [x] core data 에서 fetching 할때 keyword와 page 찾는 로직 (2월28일 완료)
 - [ ] 화면에 표시되고 있는 이미지 부터 로딩
 
 
@@ -99,6 +99,8 @@
 
 2. disk cache 에서 문제가 발생하면 어느 step 에서 문제가 발생할까
     - saving to disk step
+
+
 ```
     Java fetch request page 1
      Java fetch request page 1
@@ -489,5 +491,21 @@ get from memory     2
 메모리에서 잘 받아온다.
 
 disk에서 가져올때 오버헤드가 발생해서 else 로 빠지는 듯
+
+그냥 문제는 completion block 에 대한 이해가 부족했음
+disk에서 데이터 가져올때 completion 이후 코드는 실행 안되는 것 처럼 생각하고 코드를 짰음
+return 과 달리 completion 이후에도 코드 실행되는데 잠깐 헷갈린듯
+중복되는건 이제 해결했고 disk cache hit 이 안되는 문제 해결해야함
+
+지금은 코어데이터 엔티티를 전부 들고와서(저장된 모든 페이지)
+loop 돌면서 페이지를 찾는다. 
+예를들어 디스크에서 1페이지 찾으면
+엔티티 불러옴 -> 1페이지 찾음 -> 리턴
+디스크에서 2페이지 찾으면
+엔티티 다시 불러옴 -> 1페이지 아님 -> 2페이지 맞음 리턴
+
+이런 방식인데 비효율 적이고 또 지금 hit 이 안되니 이쪽 로직 수정한다
+일단 코어 데이터에는 keyword page 가 섞여서 들어가 있고 이걸 불러오면 각종 keyword와 page가 섞인 한 뭉텅이가 로드된다.
+얘를 처음 앱 실행 될 때 keyword기준 Map과 page는 array로 정리해놓고 불러쓰면 좋을 것 같다. (완료)
 
 
