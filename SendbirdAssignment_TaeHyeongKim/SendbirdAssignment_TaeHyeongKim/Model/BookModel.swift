@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BookModel: Decodable {
+struct BookModel: Decodable, Hashable {
     var title: String?
     var subtitle: String?
     var isbn13: String?

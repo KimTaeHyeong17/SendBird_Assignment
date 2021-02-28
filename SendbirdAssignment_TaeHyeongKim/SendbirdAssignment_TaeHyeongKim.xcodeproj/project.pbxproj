@@ -29,6 +29,9 @@
 		837E9AF025E16BA000D56BC5 /* SearchResultEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837E9AEC25E16BA000D56BC5 /* SearchResultEntity+CoreDataProperties.swift */; };
 		837E9AF125E16BA000D56BC5 /* BookModelEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837E9AED25E16BA000D56BC5 /* BookModelEntity+CoreDataClass.swift */; };
 		837E9AF225E16BA000D56BC5 /* BookModelEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837E9AEE25E16BA000D56BC5 /* BookModelEntity+CoreDataProperties.swift */; };
+		838383C325EB846E0012C695 /* SendbirdAssignment_TaeHyeongKimTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838383C225EB846E0012C695 /* SendbirdAssignment_TaeHyeongKimTests.swift */; };
+		838383CD25EB86540012C695 /* SearchResultViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838383CC25EB86540012C695 /* SearchResultViewModelTest.swift */; };
+		838383D725EB8EA60012C695 /* SendbirdAssignment_TaeHyeongKimUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838383D625EB8EA60012C695 /* SendbirdAssignment_TaeHyeongKimUITests.swift */; };
 		83F7642225E2441600629365 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F7642125E2441600629365 /* CoreDataManager.swift */; };
 		83F7642625E29E0A00629365 /* HTTPNetworkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F7642525E29E0A00629365 /* HTTPNetworkRoute.swift */; };
 		83F7642E25E29E5A00629365 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F7642D25E29E5A00629365 /* HTTPMethod.swift */; };
@@ -39,6 +42,23 @@
 		83F7643D25E29F3000629365 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F7643C25E29F3000629365 /* Result.swift */; };
 		83F7644125E29F7100629365 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F7644025E29F7100629365 /* NetworkService.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		838383C525EB846E0012C695 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 837E99A425DA4A6A00D56BC5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 837E99AB25DA4A6A00D56BC5;
+			remoteInfo = SendbirdAssignment_TaeHyeongKim;
+		};
+		838383D925EB8EA60012C695 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 837E99A425DA4A6A00D56BC5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 837E99AB25DA4A6A00D56BC5;
+			remoteInfo = SendbirdAssignment_TaeHyeongKim;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		837E99AC25DA4A6A00D56BC5 /* SendbirdAssignment_TaeHyeongKim.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SendbirdAssignment_TaeHyeongKim.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -65,6 +85,13 @@
 		837E9AEC25E16BA000D56BC5 /* SearchResultEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchResultEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		837E9AED25E16BA000D56BC5 /* BookModelEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookModelEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		837E9AEE25E16BA000D56BC5 /* BookModelEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookModelEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		838383C025EB846E0012C695 /* SendbirdAssignment_TaeHyeongKimTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SendbirdAssignment_TaeHyeongKimTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		838383C225EB846E0012C695 /* SendbirdAssignment_TaeHyeongKimTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendbirdAssignment_TaeHyeongKimTests.swift; sourceTree = "<group>"; };
+		838383C425EB846E0012C695 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		838383CC25EB86540012C695 /* SearchResultViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewModelTest.swift; sourceTree = "<group>"; };
+		838383D425EB8EA60012C695 /* SendbirdAssignment_TaeHyeongKimUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SendbirdAssignment_TaeHyeongKimUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		838383D625EB8EA60012C695 /* SendbirdAssignment_TaeHyeongKimUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendbirdAssignment_TaeHyeongKimUITests.swift; sourceTree = "<group>"; };
+		838383D825EB8EA60012C695 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		83F7642125E2441600629365 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		83F7642525E29E0A00629365 /* HTTPNetworkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPNetworkRoute.swift; sourceTree = "<group>"; };
 		83F7642D25E29E5A00629365 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
@@ -84,6 +111,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		838383BD25EB846E0012C695 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		838383D125EB8EA60012C695 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -91,6 +132,8 @@
 			isa = PBXGroup;
 			children = (
 				837E99AE25DA4A6A00D56BC5 /* SendbirdAssignment_TaeHyeongKim */,
+				838383C125EB846E0012C695 /* SendbirdAssignment_TaeHyeongKimTests */,
+				838383D525EB8EA60012C695 /* SendbirdAssignment_TaeHyeongKimUITests */,
 				837E99AD25DA4A6A00D56BC5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -99,6 +142,8 @@
 			isa = PBXGroup;
 			children = (
 				837E99AC25DA4A6A00D56BC5 /* SendbirdAssignment_TaeHyeongKim.app */,
+				838383C025EB846E0012C695 /* SendbirdAssignment_TaeHyeongKimTests.xctest */,
+				838383D425EB8EA60012C695 /* SendbirdAssignment_TaeHyeongKimUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -199,6 +244,25 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
+		838383C125EB846E0012C695 /* SendbirdAssignment_TaeHyeongKimTests */ = {
+			isa = PBXGroup;
+			children = (
+				838383C225EB846E0012C695 /* SendbirdAssignment_TaeHyeongKimTests.swift */,
+				838383C425EB846E0012C695 /* Info.plist */,
+				838383CC25EB86540012C695 /* SearchResultViewModelTest.swift */,
+			);
+			path = SendbirdAssignment_TaeHyeongKimTests;
+			sourceTree = "<group>";
+		};
+		838383D525EB8EA60012C695 /* SendbirdAssignment_TaeHyeongKimUITests */ = {
+			isa = PBXGroup;
+			children = (
+				838383D625EB8EA60012C695 /* SendbirdAssignment_TaeHyeongKimUITests.swift */,
+				838383D825EB8EA60012C695 /* Info.plist */,
+			);
+			path = SendbirdAssignment_TaeHyeongKimUITests;
+			sourceTree = "<group>";
+		};
 		83F7642425E29DE800629365 /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -258,6 +322,42 @@
 			productReference = 837E99AC25DA4A6A00D56BC5 /* SendbirdAssignment_TaeHyeongKim.app */;
 			productType = "com.apple.product-type.application";
 		};
+		838383BF25EB846E0012C695 /* SendbirdAssignment_TaeHyeongKimTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 838383C925EB846E0012C695 /* Build configuration list for PBXNativeTarget "SendbirdAssignment_TaeHyeongKimTests" */;
+			buildPhases = (
+				838383BC25EB846E0012C695 /* Sources */,
+				838383BD25EB846E0012C695 /* Frameworks */,
+				838383BE25EB846E0012C695 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				838383C625EB846E0012C695 /* PBXTargetDependency */,
+			);
+			name = SendbirdAssignment_TaeHyeongKimTests;
+			productName = SendbirdAssignment_TaeHyeongKimTests;
+			productReference = 838383C025EB846E0012C695 /* SendbirdAssignment_TaeHyeongKimTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		838383D325EB8EA60012C695 /* SendbirdAssignment_TaeHyeongKimUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 838383DB25EB8EA60012C695 /* Build configuration list for PBXNativeTarget "SendbirdAssignment_TaeHyeongKimUITests" */;
+			buildPhases = (
+				838383D025EB8EA60012C695 /* Sources */,
+				838383D125EB8EA60012C695 /* Frameworks */,
+				838383D225EB8EA60012C695 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				838383DA25EB8EA60012C695 /* PBXTargetDependency */,
+			);
+			name = SendbirdAssignment_TaeHyeongKimUITests;
+			productName = SendbirdAssignment_TaeHyeongKimUITests;
+			productReference = 838383D425EB8EA60012C695 /* SendbirdAssignment_TaeHyeongKimUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -269,6 +369,14 @@
 				TargetAttributes = {
 					837E99AB25DA4A6A00D56BC5 = {
 						CreatedOnToolsVersion = 12.4;
+					};
+					838383BF25EB846E0012C695 = {
+						CreatedOnToolsVersion = 12.4;
+						TestTargetID = 837E99AB25DA4A6A00D56BC5;
+					};
+					838383D325EB8EA60012C695 = {
+						CreatedOnToolsVersion = 12.4;
+						TestTargetID = 837E99AB25DA4A6A00D56BC5;
 					};
 				};
 			};
@@ -286,6 +394,8 @@
 			projectRoot = "";
 			targets = (
 				837E99AB25DA4A6A00D56BC5 /* SendbirdAssignment_TaeHyeongKim */,
+				838383BF25EB846E0012C695 /* SendbirdAssignment_TaeHyeongKimTests */,
+				838383D325EB8EA60012C695 /* SendbirdAssignment_TaeHyeongKimUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -299,6 +409,20 @@
 				837E99BC25DA4A7600D56BC5 /* LaunchScreen.storyboard in Resources */,
 				837E99B925DA4A7600D56BC5 /* Assets.xcassets in Resources */,
 				837E99B725DA4A6A00D56BC5 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		838383BE25EB846E0012C695 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		838383D225EB8EA60012C695 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,7 +463,37 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		838383BC25EB846E0012C695 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				838383C325EB846E0012C695 /* SendbirdAssignment_TaeHyeongKimTests.swift in Sources */,
+				838383CD25EB86540012C695 /* SearchResultViewModelTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		838383D025EB8EA60012C695 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				838383D725EB8EA60012C695 /* SendbirdAssignment_TaeHyeongKimUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		838383C625EB846E0012C695 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 837E99AB25DA4A6A00D56BC5 /* SendbirdAssignment_TaeHyeongKim */;
+			targetProxy = 838383C525EB846E0012C695 /* PBXContainerItemProxy */;
+		};
+		838383DA25EB8EA60012C695 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 837E99AB25DA4A6A00D56BC5 /* SendbirdAssignment_TaeHyeongKim */;
+			targetProxy = 838383D925EB8EA60012C695 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		837E99B525DA4A6A00D56BC5 /* Main.storyboard */ = {
@@ -515,6 +669,88 @@
 			};
 			name = Release;
 		};
+		838383C725EB846E0012C695 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9Y5NYS23KM;
+				INFOPLIST_FILE = SendbirdAssignment_TaeHyeongKimTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "uuzaza.SendbirdAssignment-TaeHyeongKimTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SendbirdAssignment_TaeHyeongKim.app/SendbirdAssignment_TaeHyeongKim";
+			};
+			name = Debug;
+		};
+		838383C825EB846E0012C695 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9Y5NYS23KM;
+				INFOPLIST_FILE = SendbirdAssignment_TaeHyeongKimTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "uuzaza.SendbirdAssignment-TaeHyeongKimTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SendbirdAssignment_TaeHyeongKim.app/SendbirdAssignment_TaeHyeongKim";
+			};
+			name = Release;
+		};
+		838383DC25EB8EA60012C695 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9Y5NYS23KM;
+				INFOPLIST_FILE = SendbirdAssignment_TaeHyeongKimUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "uuzaza.SendbirdAssignment-TaeHyeongKimUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = SendbirdAssignment_TaeHyeongKim;
+			};
+			name = Debug;
+		};
+		838383DD25EB8EA60012C695 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9Y5NYS23KM;
+				INFOPLIST_FILE = SendbirdAssignment_TaeHyeongKimUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "uuzaza.SendbirdAssignment-TaeHyeongKimUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = SendbirdAssignment_TaeHyeongKim;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -532,6 +768,24 @@
 			buildConfigurations = (
 				837E99C125DA4A7600D56BC5 /* Debug */,
 				837E99C225DA4A7600D56BC5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		838383C925EB846E0012C695 /* Build configuration list for PBXNativeTarget "SendbirdAssignment_TaeHyeongKimTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				838383C725EB846E0012C695 /* Debug */,
+				838383C825EB846E0012C695 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		838383DB25EB8EA60012C695 /* Build configuration list for PBXNativeTarget "SendbirdAssignment_TaeHyeongKimUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				838383DC25EB8EA60012C695 /* Debug */,
+				838383DD25EB8EA60012C695 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
