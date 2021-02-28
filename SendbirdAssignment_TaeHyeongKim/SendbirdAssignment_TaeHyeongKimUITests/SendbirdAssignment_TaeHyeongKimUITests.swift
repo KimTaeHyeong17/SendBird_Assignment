@@ -35,6 +35,7 @@ class SendbirdAssignment_TaeHyeongKimUITests: XCTestCase {
         searchBar.tap()
         //java 검색하고 키보드 내림
         searchBar.typeText("java\n")
+        sleep(2)
         
         //tableview 찾기
         let tableView = app.tables.firstMatch
@@ -49,7 +50,7 @@ class SendbirdAssignment_TaeHyeongKimUITests: XCTestCase {
             }
             let textInLastCell = pageLastCell.descendants(matching: .staticText).firstMatch
             //마지막 셀이 중복된다면 테스트 실패
-            XCTAssertFalse(set.contains(textInLastCell.label), "duplication found")
+            XCTAssertFalse(set.contains(textInLastCell.label), "duplication found \(textInLastCell.label)")
             
             set.insert(textInLastCell.label)
             

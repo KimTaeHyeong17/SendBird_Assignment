@@ -37,7 +37,8 @@ class SearchViewController: UIViewController {
         let curatingCellNib = UINib(nibName: "BookTableViewCell", bundle: nil)
         self.tableView.register(curatingCellNib, forCellReuseIdentifier: "BookTableViewCell")
         self.noResultLabel.isHidden = true
-        
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "clear Cache", style: .plain, target: self, action: #selector(clearCache))
+
     }
     
     private func setupViewModel(){
@@ -72,6 +73,10 @@ class SearchViewController: UIViewController {
         cancelables.insert(searchResultStream)
         cancelables.insert(resultDataStream)
     }
+    
+//    @objc func clearCache() {
+//        CoreDataManager.shared.deleteAllData()
+//    }
     
 }
 extension SearchViewController: UITableViewDataSourcePrefetching {
