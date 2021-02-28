@@ -447,3 +447,47 @@ HTML5: The Missing Manual
 Webapps in Go
 
 ```
+
+- 일단 처음 디스크 캐시에 저장할때 두번 fetch request 호출하는 게 보이고
+- 디스크 캐시에서 불러올 때 분명 page2가 디스크에 있어야 하는데 fetch request를 보내는 걸로 보아 저장과정이 잘 안된 것 같다.
+
+캐시에서 확인하고 없으면 api 호출하는 코드를 보면
+
+```swift
+    public func getSearchResultFromCache(keyword: String, page: Int, completion: @escaping (BookSearchModel?) -> ()) {
+        //get from memory cache
+        getSearchResultFromMemory(keyword: keyword, page: page) { (data) in
+            if let data = data {
+                print("get from memory     \(page)")
+                completion(data)
+            } else {
+                self.getSearchResultFromDisk(keyword: keyword, page: page) { (data) in
+                    if let data = data {
+                        print("get from disk       \(page)")
+                        completion(data)
+                        self.saveAtMemory(keyword: keyword, page: page, data: data)
+                    }else {
+                        print("call api")
+                    }
+                }
+            }
+        }
+    }
+```
+로그를 찍어보면 
+call api
+get from disk       1
+save to memory      1
+call api
+get from disk       2
+save to memory      2
+
+completion 되기 전에 좌좌좍 else 로 빠져서 api 호출 한 다음 뒤늦게 가져오는 거시였다.
+그리고 메모리에 올라간 뒤에는 
+get from memory     1
+get from memory     2
+메모리에서 잘 받아온다.
+
+disk에서 가져올때 오버헤드가 발생해서 else 로 빠지는 듯
+
+
