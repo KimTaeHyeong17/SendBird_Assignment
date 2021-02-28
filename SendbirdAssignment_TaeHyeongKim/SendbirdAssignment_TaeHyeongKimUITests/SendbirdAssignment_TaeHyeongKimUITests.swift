@@ -42,7 +42,7 @@ class SendbirdAssignment_TaeHyeongKimUITests: XCTestCase {
         var set: Set<String> = []
         var swipeCount = 0
         //계속 swipe up 해서 tableview scroll, 일단 10번 swipe 해서 통과하면 성공
-        while swipeCount < 10 {
+        while true {
             //페이지의 마지막 cell 접근
             guard let pageLastCell = tableView.cells.allElementsBoundByIndex.last else {
                 return

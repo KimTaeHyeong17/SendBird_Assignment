@@ -16,12 +16,14 @@ class SearchResultViewModel: ObservableObject {
     public var currentPage: Int = 1
     public var maxPage: Int = 1
     
+    private var set:Set<String> = []
     init(searchResultModel:  [BookModel], resultData: BookSearchModel) {
         self.searchResultArray = searchResultModel
         self.resultData = resultData
     }
     
     private func setSearchListView(data: BookSearchModel){
+        set.removeAll()
         resultData = data
         if let total = data.total {
             self.maxPage = Int(total)!/10+1
@@ -31,6 +33,7 @@ class SearchResultViewModel: ObservableObject {
             self.searchResultArray = books
         }
         currentPage += 1
+        checkDuplication()
     }
     
     private func paginationCounter(data: BookSearchModel){
@@ -39,7 +42,15 @@ class SearchResultViewModel: ObservableObject {
             searchResultArray.append(contentsOf: books)
             currentPage += 1
 //            print("\npaginationCounter \(data.page)")
+            checkDuplication()
 
+        }
+    }
+    
+    private func checkDuplication(){
+        let dups = Dictionary(grouping: searchResultArray, by: {$0}).filter { $1.count > 1 }.keys
+        for dup in dups {
+            print(dup.title!)
         }
     }
     
@@ -50,6 +61,7 @@ class SearchResultViewModel: ObservableObject {
     
     //MARK: API Call    
     public func fetchSearchResult(keyword: String) {
+        
         var gotFromCache: Bool = false
         SearchResultManager.shared.getSearchResultFromCache(
             keyword: keyword,
@@ -77,7 +89,7 @@ class SearchResultViewModel: ObservableObject {
                             SearchResultManager.shared
                                 .saveAtDisk(keyword: keyword, page: self!.currentPage, data: data)
                         }
-                        
+
                         if self?.currentPage == 1 {
                             self?.setSearchListView(data: data)
                         }else {

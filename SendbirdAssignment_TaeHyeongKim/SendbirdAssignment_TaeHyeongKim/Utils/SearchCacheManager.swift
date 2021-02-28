@@ -54,18 +54,14 @@ class SearchResultManager {
             if let data = data {
                 print("get from memory     \(page)")
                 completion(data)
-                return
-            }else {
-                ///get from disk cache
-                ///save to memory cache
+            } else {
                 self.getSearchResultFromDisk(keyword: keyword, page: page) { (data) in
                     if let data = data {
                         print("get from disk       \(page)")
                         completion(data)
                         self.saveAtMemory(keyword: keyword, page: page, data: data)
-                        return
                     }else {
-                        print("get from url        \(page)")
+                        print("call api \(page)")
                         completion(nil)
                     }
                 }
@@ -78,21 +74,22 @@ class SearchResultManager {
         let cacheKey = NSString(string: "\(keyword)/\(page)")
         
         if let cacheData = SearchResultCacheManager.shared.object(forKey: cacheKey) {
+            print("   found at memory")
             completion(cacheData.data)
         }else {
+            print("  not found at memory")
             completion(nil)
         }
     }
     
     private func getSearchResultFromDisk(keyword: String, page: Int, completion: @escaping (BookSearchModel?) -> ()) {
         let context = CoreDataManager.shared.persistentContainer.viewContext
-        completion(nil)
         do {
             let content = try context.fetch(SearchResultEntity.fetchRequest()) as! [SearchResultEntity]
             ///fetch all data, need filtering
             for item in content {
                 if item.keyword == keyword && item.page == "\(page)" {
-//                    print("data found in disk \(keyword) \(page)")
+                    //                    print("data found in disk \(keyword) \(page)")
                     ///data found -> convert to BookSearchModel
                     var books = [BookModel]()
                     for book in item.books! {
@@ -115,13 +112,14 @@ class SearchResultManager {
                             )
                         }
                     }
-                    
                     completion(BookSearchModel(total: item.total, page: item.page ,books: books))
-                    return
+                    break
+                }
+                else {
+                    completion(nil)
+                    break
                 }
             }
-            /// not found return nil
-            completion(nil)
             
         } catch {
             print(error.localizedDescription)
@@ -134,45 +132,49 @@ class SearchResultManager {
         DispatchQueue.global(qos: .background).async {
             if let data = data {
                 SearchResultCacheManager.shared.setObject(StructHolder(data: data), forKey: cacheKey)
+                print("save to memory      \(page)")
+
             }
         }
-        //print("save to memory      \(page)")
         
     }
     
     public func saveAtDisk(keyword: String, page: Int, data: BookSearchModel) {
-        let context = CoreDataManager.shared.persistentContainer.viewContext
-        
-        let entity = NSEntityDescription.entity(forEntityName: "SearchResultEntity", in: context)
-        
-        if entity != nil {
-            context.perform {
-                let searchResult = SearchResultEntity(context: context)
-                searchResult.total = data.total
-                searchResult.page = data.page
-                searchResult.keyword = keyword
-                
-                var books = [BookModelEntity(context: context)]
-                for item in data.books! {
-                    let book = BookModelEntity(context: context)
-                    book.image = item.image
-                    book.isbn13 = item.isbn13
-                    book.price = item.price
-                    book.subtitle = item.subtitle
-                    book.title = item.title
-                    book.url = item.url
-                    books.append(book)
-                }
-                searchResult.books = NSOrderedSet(array: books)
-                
-                do {
-                    try context.save()
-                    //print("save to disk        \(page)")
+        DispatchQueue.global(qos: .background).async {
+            
+            let context = CoreDataManager.shared.persistentContainer.viewContext
+            
+            let entity = NSEntityDescription.entity(forEntityName: "SearchResultEntity", in: context)
+            
+            if entity != nil {
+                context.perform {
+                    let searchResult = SearchResultEntity(context: context)
+                    searchResult.total = data.total
+                    searchResult.page = data.page
+                    searchResult.keyword = keyword
                     
-                } catch {
-                    print("coredata savedisk error \n \(error.localizedDescription)")
+                    var books = [BookModelEntity(context: context)]
+                    for item in data.books! {
+                        let book = BookModelEntity(context: context)
+                        book.image = item.image
+                        book.isbn13 = item.isbn13
+                        book.price = item.price
+                        book.subtitle = item.subtitle
+                        book.title = item.title
+                        book.url = item.url
+                        books.append(book)
+                    }
+                    searchResult.books = NSOrderedSet(array: books)
+                    
+                    do {
+                        try context.save()
+                        print("save to disk        \(page)")
+                        
+                    } catch {
+                        print("coredata savedisk error \n \(error.localizedDescription)")
+                    }
+                    
                 }
-                
             }
         }
         

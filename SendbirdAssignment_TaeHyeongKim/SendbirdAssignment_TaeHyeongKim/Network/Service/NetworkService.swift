@@ -15,6 +15,8 @@ struct NetworkService {
     
     func getSearchResult(keyword: String ,page: Int,  _ completion: @escaping (Result<BookSearchModel>) -> ()) {
         do {
+            print("     \(keyword) fetch request page \(page)")
+
             let request = try HTTPNetworkRequest.configureHTTPRequest(
                 from: .searchBook(query: keyword,page: page), with: nil, includes: nil, contains: nil, and: .get)
             
