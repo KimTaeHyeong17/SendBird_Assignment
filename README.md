@@ -150,7 +150,7 @@ disk에서 데이터 가져올때 completion 이후 코드는 실행 안되는 �
 return 과 달리 completion 이후에도 코드 실행되는데 잠깐 헷갈린듯
 
 
-#### 중복되는건 이제 해결했고 disk cache hit 이 안되는 문제 해결해야함
+#### 중복되는건 이제 해결했고 disk cache hit 이 안되는 문제 해결해야함 (해결완료)
 
 지금은 코어데이터 엔티티를 전부 들고와서(저장된 모든 페이지)
 loop 돌면서 페이지를 찾는다. 
@@ -169,4 +169,14 @@ loop 돌면서 페이지를 찾는다.
 ### 2월28 이후 남은작업
 - [ ] 캐싱 데이터 바뀌었을 경우 E-Tag등 활용해 update 해야함
 - [ ] 화면에 표시되고 있는 이미지 부터 로딩
-- [ ] 빠르게 스크롤 하면 이미지 flickering (url image library 참고해보면될듯)
+- [x] 빠르게 스크롤 하면 이미지 flickering (url image library 참고해보면될듯)cell.tag = indexPath.row 로 해서 tag와 해당 indexPath를 비교해서 이미지 표시하니 해결
+
+```swift
+ if let url = book.image {
+                UrlImageManager.shared.getImage(url: url) { (image) in
+                    if cell.tag == indexPath.row {
+                        cell.imgView.image = image
+                    }
+                }
+            }
+```
