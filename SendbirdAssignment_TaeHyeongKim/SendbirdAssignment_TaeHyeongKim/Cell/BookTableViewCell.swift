@@ -31,7 +31,12 @@ class BookTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     override func prepareForReuse() {
+        super.prepareForReuse()
         imgView.image = nil
+        titleLabel.text = nil
+        subTitleLabel.text = nil
+        isbn13Label.text = nil
+        priceLabel.text = nil
     }
     
     @IBAction func actionLink(_ sender: Any) {

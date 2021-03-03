@@ -102,6 +102,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
             
             let book = viewModel.searchResultArray[indexPath.row]
             cell.selectionStyle = .none
+            cell.tag = indexPath.row
             cell.titleLabel.text = book.title
             if book.subtitle?.count == 0 {
                 cell.subTitleLabel.text = "no description available"
@@ -116,7 +117,9 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
             cell.imgView.image = UIImage(named: "bookPlaceholder")
             if let url = book.image {
                 UrlImageManager.shared.getImage(url: url) { (image) in
-                    cell.imgView.image = image
+                    if cell.tag == indexPath.row {
+                        cell.imgView.image = image
+                    }
                 }
             }
           
